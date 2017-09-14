@@ -1,0 +1,3 @@
+rootProject.name = 'visualization-plugin'
+include ':prob2-ui'
+project(":prob2-ui").projectDir = file("../prob2-ui")
