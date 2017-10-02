@@ -1,11 +1,11 @@
 package de.heinzen.probplugin.visualization;
 
-import de.prob.animator.domainobjects.AbstractEvalResult;
-import de.prob.animator.domainobjects.EvalResult;
-import de.prob.animator.domainobjects.EventB;
-import de.prob.animator.domainobjects.IEvalElement;
+import de.prob.animator.domainobjects.*;
 import de.prob.statespace.Trace;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -17,6 +17,8 @@ import java.util.stream.Collectors;
  * @since 25.09.17
  */
 public class VisualizationModel {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(VisualizationModel.class);
 
     private Trace oldTrace;
     private Trace newTrace;
@@ -59,5 +61,24 @@ public class VisualizationModel {
         EvalResult oldValue = (EvalResult) oldTrace.evalCurrent(new EventB(formula));
         EvalResult newValue = (EvalResult) newTrace.evalCurrent(new EventB(formula));
         return !oldValue.getValue().equals(newValue.getValue());
+    }
+
+    public Object getValue(String formula) {
+        LOGGER.info("Get value for formula \"{}\".", formula);
+        if (newStringToResult.containsKey(formula)) {
+            LOGGER.info("Using map to get value of formula \"{}\".", formula);
+            try {
+                EvalResult value = newStringToResult.get(formula);
+                TranslatedEvalResult translatedValue = value.translate();
+                return translatedValue.getValue();
+            } catch (Exception  e) {
+                LOGGER.info("Exception while trying to get the value for formula \"{}\" out of the map. Try to eval the trace.", formula);
+                EvalResult value = (EvalResult) newTrace.evalCurrent(new EventB(formula, Collections.emptySet(), FormulaExpand.EXPAND));
+                return value.translate().getValue();
+            }
+        }
+        LOGGER.info("Eval trace to get value of formula \"{}\".", formula);
+        EvalResult value = (EvalResult) newTrace.evalCurrent(new EventB(formula, Collections.emptySet(), FormulaExpand.EXPAND));
+        return value.translate().getValue();
     }
 }

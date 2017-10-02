@@ -39,7 +39,7 @@ public class VisualizationMenu extends Menu{
 
     @FXML
     private void stopVisualization(){
-        System.out.println(stopVisualizationItem.getId());
+        plugin.stopVisualization();
     }
 
     @FXML
