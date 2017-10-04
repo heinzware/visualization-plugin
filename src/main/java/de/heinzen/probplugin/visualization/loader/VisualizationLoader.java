@@ -54,10 +54,10 @@ public class VisualizationLoader {
     public Visualization loadVisualization(File selectedVisualization) {
         String selectedVisualizationExtension = Files.getFileExtension(selectedVisualization.getName());
         if (selectedVisualizationExtension.equals("java")) {
-            LOGGER.info("Try to open visualization-class {}.", selectedVisualization);
+            LOGGER.debug("Try to open visualization-class {}.", selectedVisualization);
             return loadVisualizationClass(selectedVisualization);
         } else if (selectedVisualizationExtension.equals("jar")){
-            LOGGER.info("Try to open visualization-jar {}.", selectedVisualization);
+            LOGGER.debug("Try to open visualization-jar {}.", selectedVisualization);
             return loadVisualizationJar(selectedVisualization);
         }
         return null;
@@ -66,16 +66,16 @@ public class VisualizationLoader {
     private Visualization loadVisualizationClass(File selectedVisualization) {
         String fileName = selectedVisualization.getName();
         try {
-            LOGGER.info("Try to compile file {} using plugin-classpath\n{}.", fileName, pluginClassPath);
+            LOGGER.debug("Try to compile file {} using plugin-classpath\n{}.", fileName, pluginClassPath);
             String className = fileName.replace(".java", "");
 
             Class visualizationClass = new InMemoryCompiler()
                     .compile(className, selectedVisualization, pluginClassPath, pluginClassLoader);
 
-            LOGGER.info("Successfully compiled class {}.", className);
+            LOGGER.debug("Successfully compiled class {}.", className);
 
             if (checkVisualizationClass(visualizationClass)) {
-                LOGGER.info("Class {} extends the abstract class Visualization. Create an instance of it.", className);
+                LOGGER.debug("Class {} extends the abstract class Visualization. Create an instance of it.", className);
                 return (Visualization) visualizationClass.newInstance();
             } else {
                 LOGGER.warn("Class {} does not extend the abstract class Visualization.", className);
@@ -86,7 +86,7 @@ public class VisualizationLoader {
             }
 
         } catch (Exception e) {
-            LOGGER.error("Exception while loading the visualization:\n{}", fileName, e);
+            LOGGER.warn("Exception while loading the visualization:\n{}", fileName, e);
             showAlert(Alert.AlertType.ERROR,
                     "Exception while loading the visualization.\n\nThe thrown exception is shown in the Log-file.");
             return null;
@@ -117,18 +117,18 @@ public class VisualizationLoader {
                 visualizationClass = null;
             }
             if (visualizationClass != null) {
-                LOGGER.info("Found visualization-class {} in jar:\n{}", className, fileName);
+                LOGGER.debug("Found visualization-class {} in jar: {}", className, fileName);
                 return (Visualization) visualizationClass.newInstance();
 
             } else {
-                LOGGER.warn("No visualization-class found in jar:\n{}", fileName);
+                LOGGER.warn("No visualization-class found in jar: {}", fileName);
                 showAlert(Alert.AlertType.WARNING,
                         "No visualization-class found!\n\nThe jar \"%s\" is not a valid visualization.",
                         fileName);
                 return null;
             }
         } catch (Exception e) {
-            LOGGER.error("Exception while loading the visualization:\n{}", fileName, e);
+            LOGGER.warn("Exception while loading the visualization:\n{}", fileName, e);
             showAlert(Alert.AlertType.ERROR,
                     "Exception while loading the visualization.\n\nThe thrown exception is shown in the Log-file.");
             return null;

@@ -40,7 +40,6 @@ import java.util.stream.Collectors;
 public class VisualizationPlugin extends ProBPlugin {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(VisualizationMenu.class);
-    private final ChangeListener<AbstractModel> modelChangeListener;
 
     private Tab visualizationTab;
     private Menu visualizationMenu;
@@ -49,6 +48,7 @@ public class VisualizationPlugin extends ProBPlugin {
     private VisualizationLoader visualizationLoader;
 
     private final ChangeListener<Trace> currentTraceChangeListener;
+    private final ChangeListener<AbstractModel> modelChangeListener;
     private final StageManager stageManager;
     private final CurrentTrace currentTrace;
 
@@ -148,7 +148,7 @@ public class VisualizationPlugin extends ProBPlugin {
     }
 
     public void openVisualization() {
-        LOGGER.info("Show filechooser to select a visualization.");
+        LOGGER.debug("Show filechooser to select a visualization.");
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select a visualization");
         fileChooser.getExtensionFilters()
@@ -157,7 +157,7 @@ public class VisualizationPlugin extends ProBPlugin {
         File selectedVisualization = fileChooser.showOpenDialog(stageManager.getCurrent());
 
         if (selectedVisualization != null) {
-            LOGGER.info("Try to load visualization from file {}.", selectedVisualization.getName());
+            LOGGER.debug("Try to load visualization from file {}.", selectedVisualization.getName());
             if (visualizationLoader == null) {
                 visualizationLoader = new VisualizationLoader(stageManager,(PluginClassLoader) getWrapper().getPluginClassLoader());
             }
@@ -221,13 +221,16 @@ public class VisualizationPlugin extends ProBPlugin {
     }
 
     private void startVisualization(Visualization loadedVisualization) {
+        LOGGER.debug("Starting the visualization \"{}\"", loadedVisualization.getName());
         if (visualization != null) {
             stopVisualization();
         }
         visualization = loadedVisualization;
         visualization.setController(this);
         visualization.setModel(visualizationModel);
+        visualizationTab.setText(visualization.getName());
         if (currentTrace.getCurrentState() != null && currentTrace.getCurrentState().isInitialised()) {
+            LOGGER.debug("Start: The current state is initialised, call initialize() of visualization.");
             visualizationModel.setTraces(null, currentTrace.get());
             visualization.initialize(visualizationTab);
             visualization.registerFormulaListener();
@@ -239,6 +242,7 @@ public class VisualizationPlugin extends ProBPlugin {
     }
 
     public void stopVisualization() {
+        LOGGER.debug("Stopping visualization \"{}\"!", visualization.getName());
         currentTrace.removeListener(currentTraceChangeListener);
         if (formulaListenerMap != null && !formulaListenerMap.isEmpty()) {
             formulaListenerMap.clear();
@@ -252,11 +256,12 @@ public class VisualizationPlugin extends ProBPlugin {
         visualization = null;
         visualizationRunning.set(false);
         visualizationTab.setContent(createPlaceHolderContent());
+        visualizationTab.setText("BMotion");
     }
 
     private void updateVisualization() {
         //first check which formulas have changed
-        LOGGER.info("Update visualization!");
+        LOGGER.debug("Update visualization!");
         if (formulaListenerMap != null) {
             List<String> changedFormulas = formulaListenerMap.keySet().stream()
                     .filter(new Predicate<String>() {
@@ -265,6 +270,8 @@ public class VisualizationPlugin extends ProBPlugin {
                             return visualizationModel.hasChanged(formula);
                         }
                     }).collect(Collectors.toList());
+
+            LOGGER.debug("The following formulas have changed their values: {}", String.join(" ", changedFormulas));
 
             Set<FormulaListener> listenersToTrigger = new HashSet<>();
             for (String formula : changedFormulas) {
@@ -284,6 +291,7 @@ public class VisualizationPlugin extends ProBPlugin {
                         formulaValueMap.put(formulas[i], formulaValue);
                     }
                 }
+                LOGGER.debug("Fire listener for formulas: {}", String.join(" ", formulas));
                 listener.variablesChanged(formulaValues);
             }
         }

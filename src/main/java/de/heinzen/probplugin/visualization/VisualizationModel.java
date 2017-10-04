@@ -33,6 +33,7 @@ public class VisualizationModel {
             oldStringToResult = oldValues.keySet().stream()
                     .filter(element -> element instanceof EventB)
                     .map(element -> (EventB) element)
+                    .filter(eventB -> oldValues.get(eventB) instanceof EvalResult)
                     .collect(Collectors.toMap(EventB::toString, eventB -> (EvalResult) oldValues.get(eventB)));
         } else {
             oldStringToResult = null;
@@ -42,6 +43,7 @@ public class VisualizationModel {
             newStringToResult = newValues.keySet().stream()
                     .filter(element -> element instanceof EventB)
                     .map(element -> (EventB) element)
+                    .filter(eventB -> newValues.get(eventB) instanceof EvalResult)
                     .collect(Collectors.toMap(EventB::toString, eventB -> (EvalResult) newValues.get(eventB)));
         } else {
             newStringToResult = null;
@@ -64,21 +66,41 @@ public class VisualizationModel {
     }
 
     public Object getValue(String formula) {
-        LOGGER.info("Get value for formula \"{}\".", formula);
+        LOGGER.debug("Get value for formula \"{}\".", formula);
         if (newStringToResult.containsKey(formula)) {
-            LOGGER.info("Using map to get value of formula \"{}\".", formula);
+            LOGGER.debug("Using map to get value of formula \"{}\".", formula);
             try {
                 EvalResult value = newStringToResult.get(formula);
                 TranslatedEvalResult translatedValue = value.translate();
                 return translatedValue.getValue();
             } catch (Exception  e) {
-                LOGGER.info("Exception while trying to get the value for formula \"{}\" out of the map. Try to eval the trace.", formula);
-                EvalResult value = (EvalResult) newTrace.evalCurrent(new EventB(formula, Collections.emptySet(), FormulaExpand.EXPAND));
-                return value.translate().getValue();
+                LOGGER.debug("Exception while trying to get the value for formula \"{}\" out of the map. Try to eval the trace.", formula);
+                return evalCurrent(formula);
             }
         }
-        LOGGER.info("Eval trace to get value of formula \"{}\".", formula);
-        EvalResult value = (EvalResult) newTrace.evalCurrent(new EventB(formula, Collections.emptySet(), FormulaExpand.EXPAND));
-        return value.translate().getValue();
+        LOGGER.debug("Eval trace to get value of formula \"{}\".", formula);
+        return evalCurrent(formula);
+    }
+
+    private Object evalCurrent(String formula) {
+        AbstractEvalResult evalResult = newTrace.evalCurrent(new EventB(formula, Collections.emptySet(), FormulaExpand.EXPAND));
+        if (evalResult instanceof EvalResult) {
+            EvalResult value = (EvalResult) evalResult;
+            return value.translate().getValue();
+        }
+        return null;
+    }
+
+    public Object getPreviousValue(String formula) {
+        if (newTrace.getPreviousState() != null) {
+            AbstractEvalResult evalResult = newTrace.getPreviousState()
+                    .eval(new EventB(formula, Collections.emptySet(), FormulaExpand.EXPAND));
+            if (evalResult instanceof EvalResult) {
+                EvalResult value = (EvalResult) evalResult;
+                TranslatedEvalResult translatedValue = value.translate();
+                return translatedValue.getValue();
+            }
+        }
+        return null;
     }
 }

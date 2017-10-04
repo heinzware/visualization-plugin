@@ -36,7 +36,7 @@ public abstract class Visualization {
         controller.registerFormulaListener(formulas, listener);
     }
 
-    protected final void registerEventListenerListener(String event, EventListener listener) {
+    protected final void registerEventListener(String event, EventListener listener) {
         controller.registerEventListener(event, listener);
     }
 
