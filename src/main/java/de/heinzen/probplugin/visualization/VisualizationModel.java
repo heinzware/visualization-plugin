@@ -2,6 +2,8 @@ package de.heinzen.probplugin.visualization;
 
 import de.prob.animator.domainobjects.*;
 import de.prob.statespace.Trace;
+import de.prob.statespace.Transition;
+import de.prob2.ui.prob2fx.CurrentTrace;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,10 +22,16 @@ public class VisualizationModel {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(VisualizationModel.class);
 
+    private final CurrentTrace currentTrace;
+
     private Trace oldTrace;
     private Trace newTrace;
     private Map<String, EvalResult> oldStringToResult;
     private Map<String, EvalResult> newStringToResult;
+
+    public VisualizationModel(CurrentTrace currentTrace) {
+        this.currentTrace = currentTrace;
+    }
 
     public void setTraces(Trace oldTrace, Trace newTrace) {
         this.oldTrace = oldTrace;
@@ -39,6 +47,11 @@ public class VisualizationModel {
             oldStringToResult = null;
         }
         if (newTrace != null) {
+            StringBuilder sb = new StringBuilder();
+            for (Transition trans : newTrace.getNextTransitions()) {
+                sb.append(trans.getName()).append(" ").append(trans.getParameterPredicate()).append(" ");
+            }
+            LOGGER.info("The following transitions are available: {}", sb);
             Map<IEvalElement, AbstractEvalResult> newValues = newTrace.getCurrentState().getValues();
             newStringToResult = newValues.keySet().stream()
                     .filter(element -> element instanceof EventB)
@@ -80,6 +93,16 @@ public class VisualizationModel {
         }
         LOGGER.debug("Eval trace to get value of formula \"{}\".", formula);
         return evalCurrent(formula);
+    }
+
+    public boolean executeEvent(String event, String... predicates) {
+        Trace currentTrace = this.currentTrace.get();
+        if (currentTrace.canExecuteEvent(event, predicates)) {
+            Trace resultTrace = currentTrace.execute(event, predicates);
+            this.currentTrace.set(resultTrace);
+            return true;
+        }
+        return false;
     }
 
     private Object evalCurrent(String formula) {

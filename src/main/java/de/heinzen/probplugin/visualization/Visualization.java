@@ -20,6 +20,8 @@ public abstract class Visualization {
 
     protected abstract void initialize(Tab tab);
 
+    protected abstract void stop();
+
     protected abstract void registerFormulaListener();
 
     protected abstract void registerEventListener();

@@ -64,7 +64,7 @@ public class VisualizationPlugin extends ProBPlugin {
 
         stageManager = getInjector().getInstance(StageManager.class);
         currentTrace = getInjector().getInstance(CurrentTrace.class);
-        visualizationModel = new VisualizationModel();
+        visualizationModel = new VisualizationModel(currentTrace);
 
         if (currentTrace.getModel() != null &&
                 currentTrace.getModel() instanceof EventBModel) {
@@ -242,21 +242,24 @@ public class VisualizationPlugin extends ProBPlugin {
     }
 
     public void stopVisualization() {
-        LOGGER.debug("Stopping visualization \"{}\"!", visualization.getName());
-        currentTrace.removeListener(currentTraceChangeListener);
-        if (formulaListenerMap != null && !formulaListenerMap.isEmpty()) {
-            formulaListenerMap.clear();
+        if (visualizationRunning.get()) {
+            LOGGER.debug("Stopping visualization \"{}\"!", visualization.getName());
+            currentTrace.removeListener(currentTraceChangeListener);
+            if (formulaListenerMap != null && !formulaListenerMap.isEmpty()) {
+                formulaListenerMap.clear();
+            }
+            if (formulasMap != null && !formulasMap.isEmpty()) {
+                formulasMap.clear();
+            }
+            if (eventListenerMap != null && !eventListenerMap.isEmpty()) {
+                eventListenerMap.clear();
+            }
+            visualization.stop();
+            visualization = null;
+            visualizationRunning.set(false);
+            visualizationTab.setContent(createPlaceHolderContent());
+            visualizationTab.setText("BMotion");
         }
-        if (formulasMap != null && !formulasMap.isEmpty()) {
-            formulasMap.clear();
-        }
-        if (eventListenerMap != null && !eventListenerMap.isEmpty()) {
-            eventListenerMap.clear();
-        }
-        visualization = null;
-        visualizationRunning.set(false);
-        visualizationTab.setContent(createPlaceHolderContent());
-        visualizationTab.setText("BMotion");
     }
 
     private void updateVisualization() {
