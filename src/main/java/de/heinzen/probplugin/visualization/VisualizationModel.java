@@ -3,7 +3,10 @@ package de.heinzen.probplugin.visualization;
 import de.prob.animator.domainobjects.*;
 import de.prob.statespace.Trace;
 import de.prob.statespace.Transition;
+import de.prob2.ui.internal.StageManager;
 import de.prob2.ui.prob2fx.CurrentTrace;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,14 +26,16 @@ public class VisualizationModel {
     private static final Logger LOGGER = LoggerFactory.getLogger(VisualizationModel.class);
 
     private final CurrentTrace currentTrace;
+    private final StageManager stageManager;
 
     private Trace oldTrace;
     private Trace newTrace;
     private Map<String, EvalResult> oldStringToResult;
     private Map<String, EvalResult> newStringToResult;
 
-    public VisualizationModel(CurrentTrace currentTrace) {
+    public VisualizationModel(CurrentTrace currentTrace, StageManager stageManager) {
         this.currentTrace = currentTrace;
+        this.stageManager = stageManager;
     }
 
     public void setTraces(Trace oldTrace, Trace newTrace) {
@@ -67,14 +72,29 @@ public class VisualizationModel {
         if (oldTrace == null) {
             return true;
         }
-        if (oldStringToResult.containsKey(formula) && newStringToResult.containsKey(formula)) {
-            //if the formula is just a variable or a constant, lookup the values in the maps
-            String newValue = newStringToResult.get(formula).getValue();
-            String oldValue = oldStringToResult.get(formula).getValue();
-            return !oldValue.equals(newValue);
+
+        EvalResult oldValue = null;
+        EvalResult newValue = null;
+
+        if (oldStringToResult.containsKey(formula)) {
+            oldValue = oldStringToResult.get(formula);
+        } else {
+            AbstractEvalResult oldResult = oldTrace.evalCurrent(new EventB(formula));
+            if (oldResult instanceof EvalResult) {
+                oldValue = (EvalResult) oldResult;
+            }
         }
-        EvalResult oldValue = (EvalResult) oldTrace.evalCurrent(new EventB(formula));
-        EvalResult newValue = (EvalResult) newTrace.evalCurrent(new EventB(formula));
+        if (newStringToResult.containsKey(formula)) {
+           newValue = newStringToResult.get(formula);
+        } else {
+            AbstractEvalResult newResult = newTrace.evalCurrent(new EventB(formula));
+            if (newResult instanceof EvalResult) {
+                newValue = (EvalResult) newResult;
+            }
+        }
+        if (newValue == null) return false;
+        if (oldValue == null) return true;
+
         return !oldValue.getValue().equals(newValue.getValue());
     }
 
@@ -106,12 +126,25 @@ public class VisualizationModel {
     }
 
     private Object evalCurrent(String formula) {
-        AbstractEvalResult evalResult = newTrace.evalCurrent(new EventB(formula, Collections.emptySet(), FormulaExpand.EXPAND));
-        if (evalResult instanceof EvalResult) {
-            EvalResult value = (EvalResult) evalResult;
-            return value.translate().getValue();
+        try {
+            AbstractEvalResult evalResult = newTrace.evalCurrent(new EventB(formula, Collections.emptySet(), FormulaExpand.EXPAND));
+            LOGGER.debug("Evaluated formula {} and got the result: {}", formula, evalResult);
+            if (evalResult instanceof EvalResult) {
+                EvalResult value = (EvalResult) evalResult;
+                return value.translate().getValue();
+            }
+            return null;
+        } catch (EvaluationException evalException) {
+            Alert alert = stageManager.makeAlert(Alert.AlertType.WARNING,
+                    "EvaluationException while evaluating the formula \"" + formula +
+                            "\".\nThe message of the thrown message is\n\n" + evalException.getMessage() + "\n\n" +
+                            "More details are in the log.", ButtonType.OK);
+            alert.initOwner(stageManager.getCurrent());
+            alert.show();
+            LOGGER.warn("EvaluationException while evaluating the formula \"" + formula +"\".", evalException);
+            return null;
         }
-        return null;
+
     }
 
     public Object getPreviousValue(String formula) {

@@ -55,7 +55,7 @@ public class VisualizationPlugin extends ProBPlugin {
     private HashMap<String, List<FormulaListener>> formulaListenerMap;
     private HashMap<FormulaListener, String[]> formulasMap;
     private HashMap<String, EventListener> eventListenerMap;
-    private EventBModel eventBModel;
+    private AbstractModel model;
     private SimpleBooleanProperty visualizationPossible = new SimpleBooleanProperty(false);
     private SimpleBooleanProperty visualizationRunning  = new SimpleBooleanProperty(false);
 
@@ -64,20 +64,20 @@ public class VisualizationPlugin extends ProBPlugin {
 
         stageManager = getInjector().getInstance(StageManager.class);
         currentTrace = getInjector().getInstance(CurrentTrace.class);
-        visualizationModel = new VisualizationModel(currentTrace);
+        visualizationModel = new VisualizationModel(currentTrace, stageManager);
 
-        if (currentTrace.getModel() != null &&
-                currentTrace.getModel() instanceof EventBModel) {
-            eventBModel = (EventBModel) currentTrace.getModel();
+        if (currentTrace.getModel() != null) {
+            model = currentTrace.getModel();
             visualizationPossible.set(true);
         }
 
         modelChangeListener = (observable, oldModel, newModel) -> {
-            if (newModel != null && newModel instanceof EventBModel) {
-                if (!newModel.equals(eventBModel)) {
-                    eventBModel = (EventBModel) newModel;
+            if (newModel != null) {
+                if (!newModel.equals(model)) {
+                    model = newModel;
                     visualizationPossible.set(true);
                     if (visualizationRunning.get()) {
+                        //TODO: better alert message
                         Alert alert = stageManager.makeAlert(Alert.AlertType.INFORMATION,
                                 "Stopping the visualization because the used model changed.",
                                 ButtonType.OK);
@@ -87,7 +87,7 @@ public class VisualizationPlugin extends ProBPlugin {
                     }
                 }
             } else {
-                eventBModel = null;
+                model = null;
                 visualizationPossible.setValue(false);
                 if (visualizationRunning.get()) {
                     Alert alert = stageManager.makeAlert(Alert.AlertType.INFORMATION,
@@ -168,7 +168,8 @@ public class VisualizationPlugin extends ProBPlugin {
         }
     }
 
-    public void registerFormulaListener(String[] formulas, FormulaListener listener) {
+    public void registerFormulaListener(FormulaListener listener) {
+        String[] formulas = listener.getFormulas();
         if (formulaListenerMap == null) {
             formulaListenerMap = new HashMap<>();
         }
@@ -185,11 +186,11 @@ public class VisualizationPlugin extends ProBPlugin {
         formulasMap.put(listener, formulas);
     }
 
-    public void registerEventListener(String event, EventListener listener) {
+    public void registerEventListener(EventListener listener) {
         if (eventListenerMap == null) {
             eventListenerMap = new HashMap<>();
         }
-        eventListenerMap.put(event, listener);
+        eventListenerMap.put(listener.getEvent(), listener);
     }
 
     private Node createPlaceHolderContent() {
@@ -222,6 +223,11 @@ public class VisualizationPlugin extends ProBPlugin {
 
     private void startVisualization(Visualization loadedVisualization) {
         LOGGER.debug("Starting the visualization \"{}\"", loadedVisualization.getName());
+        //TODO check if the new visualization is for the used model
+        /*if (loadedVisualization.getModels() != null &&
+                Arrays.asList(loadedVisualization.getModels()).contains(model)) {*/
+            System.out.println(model + " from file " + model.getModelFile().getName());
+        //}
         if (visualization != null) {
             stopVisualization();
         }
@@ -229,12 +235,12 @@ public class VisualizationPlugin extends ProBPlugin {
         visualization.setController(this);
         visualization.setModel(visualizationModel);
         visualizationTab.setText(visualization.getName());
+        visualization.registerFormulaListener();
+        visualization.registerEventListener();
         if (currentTrace.getCurrentState() != null && currentTrace.getCurrentState().isInitialised()) {
             LOGGER.debug("Start: The current state is initialised, call initialize() of visualization.");
             visualizationModel.setTraces(null, currentTrace.get());
             visualization.initialize(visualizationTab);
-            visualization.registerFormulaListener();
-            visualization.registerEventListener();
             updateVisualization();
         }
         currentTrace.addListener(currentTraceChangeListener);

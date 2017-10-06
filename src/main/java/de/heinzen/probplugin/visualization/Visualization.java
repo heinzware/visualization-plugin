@@ -2,6 +2,7 @@ package de.heinzen.probplugin.visualization;
 
 import de.heinzen.probplugin.visualization.listener.EventListener;
 import de.heinzen.probplugin.visualization.listener.FormulaListener;
+import de.prob.translator.types.BigInteger;
 import javafx.scene.control.Tab;
 
 /**
@@ -17,6 +18,8 @@ public abstract class Visualization {
     protected VisualizationModel model;
 
     protected abstract String getName();
+
+    protected abstract String[] getModels();
 
     protected abstract void initialize(Tab tab);
 
@@ -34,12 +37,28 @@ public abstract class Visualization {
         this.model = model;
     }
 
-    protected final void registerFormulaListener(String[] formulas, FormulaListener listener) {
-        controller.registerFormulaListener(formulas, listener);
+    protected final void registerFormulaListener(FormulaListener listener) {
+        controller.registerFormulaListener(listener);
     }
 
-    protected final void registerEventListener(String event, EventListener listener) {
-        controller.registerEventListener(event, listener);
+    protected final void registerEventListener(EventListener listener) {
+        controller.registerEventListener(listener);
     }
+
+    protected final Integer translateToInt(Object intObj) {
+        if (intObj instanceof BigInteger) {
+            return ((BigInteger) intObj).intValue();
+        }
+        return null;
+    }
+
+    protected final Boolean translateToBool(Object boolObj) {
+        if (boolObj instanceof de.prob.translator.types.Boolean) {
+            return ((de.prob.translator.types.Boolean) boolObj).booleanValue();
+        }
+        return null;
+    }
+
+
 
 }

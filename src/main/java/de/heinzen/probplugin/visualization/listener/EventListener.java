@@ -9,6 +9,16 @@ package de.heinzen.probplugin.visualization.listener;
  */
 public abstract class EventListener {
 
+    private final String event;
+
+    public EventListener(String event) {
+        this.event = event;
+    }
+
+    public String getEvent() {
+        return event;
+    }
+
     public abstract void eventExcecuted();
 
 }
