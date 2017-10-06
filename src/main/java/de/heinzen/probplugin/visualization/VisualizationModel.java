@@ -137,7 +137,7 @@ public class VisualizationModel {
         } catch (EvaluationException evalException) {
             Alert alert = stageManager.makeAlert(Alert.AlertType.WARNING,
                     "EvaluationException while evaluating the formula \"" + formula +
-                            "\".\nThe message of the thrown message is\n\n" + evalException.getMessage() + "\n\n" +
+                            "\".\nThe message of the thrown exception is:\n\n\"" + evalException.getMessage() + "\"\n\n" +
                             "More details are in the log.", ButtonType.OK);
             alert.initOwner(stageManager.getCurrent());
             alert.show();

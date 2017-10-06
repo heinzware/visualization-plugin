@@ -4,7 +4,6 @@ import de.heinzen.probplugin.visualization.listener.EventListener;
 import de.heinzen.probplugin.visualization.listener.FormulaListener;
 import de.heinzen.probplugin.visualization.loader.VisualizationLoader;
 import de.heinzen.probplugin.visualization.menu.VisualizationMenu;
-import de.prob.model.eventb.EventBModel;
 import de.prob.model.representation.AbstractModel;
 import de.prob.statespace.Trace;
 import de.prob2.ui.internal.StageManager;
@@ -53,7 +52,6 @@ public class VisualizationPlugin extends ProBPlugin {
     private final CurrentTrace currentTrace;
 
     private HashMap<String, List<FormulaListener>> formulaListenerMap;
-    private HashMap<FormulaListener, String[]> formulasMap;
     private HashMap<String, EventListener> eventListenerMap;
     private AbstractModel model;
     private SimpleBooleanProperty visualizationPossible = new SimpleBooleanProperty(false);
@@ -173,9 +171,6 @@ public class VisualizationPlugin extends ProBPlugin {
         if (formulaListenerMap == null) {
             formulaListenerMap = new HashMap<>();
         }
-        if (formulasMap == null) {
-            formulasMap = new HashMap<>();
-        }
         for(String formula : formulas) {
             if (formulaListenerMap.containsKey(formula)) {
                 formulaListenerMap.get(formula).add(listener);
@@ -183,7 +178,6 @@ public class VisualizationPlugin extends ProBPlugin {
                 formulaListenerMap.put(formula, new ArrayList<>(Collections.singletonList(listener)));
             }
         }
-        formulasMap.put(listener, formulas);
     }
 
     public void registerEventListener(EventListener listener) {
@@ -254,9 +248,6 @@ public class VisualizationPlugin extends ProBPlugin {
             if (formulaListenerMap != null && !formulaListenerMap.isEmpty()) {
                 formulaListenerMap.clear();
             }
-            if (formulasMap != null && !formulasMap.isEmpty()) {
-                formulasMap.clear();
-            }
             if (eventListenerMap != null && !eventListenerMap.isEmpty()) {
                 eventListenerMap.clear();
             }
@@ -289,7 +280,7 @@ public class VisualizationPlugin extends ProBPlugin {
 
             Map<String, Object> formulaValueMap = new HashMap<>(changedFormulas.size());
             for (FormulaListener listener : listenersToTrigger) {
-                String[] formulas = formulasMap.get(listener);
+                String[] formulas = listener.getFormulas();
                 Object[] formulaValues = new Object[formulas.length];
                 for (int i = 0; i < formulas.length; i++) {
                     if (formulaValueMap.containsKey(formulas[i])) {
@@ -301,7 +292,17 @@ public class VisualizationPlugin extends ProBPlugin {
                     }
                 }
                 LOGGER.debug("Fire listener for formulas: {}", String.join(" ", formulas));
-                listener.variablesChanged(formulaValues);
+                try {
+                    listener.variablesChanged(formulaValues);
+                } catch (Exception e) {
+                    Alert alert = stageManager.makeExceptionAlert(Alert.AlertType.WARNING,
+                            "Exception while calling the formula listener for the formulas:\n\"" +
+                                    String.join(" ", formulas) + "\"\n", e);
+                    alert.initOwner(stageManager.getCurrent());
+                    alert.show();
+                    LOGGER.warn("Exception while calling the formula listener for the formulas:\n\"" +
+                            String.join(" ", formulas), e);
+                }
             }
         }
 

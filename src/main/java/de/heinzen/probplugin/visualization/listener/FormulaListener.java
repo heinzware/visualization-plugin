@@ -26,6 +26,6 @@ public abstract class FormulaListener {
     }
 
     //TODO: Formulas as varargs of the constructor
-    public abstract void variablesChanged(Object[] newValues);
+    public abstract void variablesChanged(Object[] newValues) throws Exception;
 
 }
