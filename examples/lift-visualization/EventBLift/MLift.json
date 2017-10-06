@@ -1,0 +1,22 @@
+{
+  "name": "MLift",
+  "description": "(Projekt wurde automatisch aus Datei /home/christoph/Dokumente/Masterarbeit/software/Visualizations/lift-visualization/EventBLift/MLift.bum erstellt)",
+  "machines": [
+    {
+      "name": "MLift",
+      "description": "",
+      "location": "MLift.bum",
+      "type": "EVENTB",
+      "ltlFormulas": [],
+      "ltlPatterns": [],
+      "cbcFormulas": [],
+      "modelcheckingItems": []
+    }
+  ],
+  "preferences": [],
+  "runconfigurations": [
+    {
+      "name": "MLift.default"
+    }
+  ]
+}
