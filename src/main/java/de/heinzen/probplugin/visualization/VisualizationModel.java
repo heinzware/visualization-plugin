@@ -1,8 +1,8 @@
 package de.heinzen.probplugin.visualization;
 
 import de.prob.animator.domainobjects.*;
+import de.prob.statespace.State;
 import de.prob.statespace.Trace;
-import de.prob.statespace.Transition;
 import de.prob2.ui.internal.StageManager;
 import de.prob2.ui.prob2fx.CurrentTrace;
 import javafx.scene.control.Alert;
@@ -52,11 +52,6 @@ public class VisualizationModel {
             oldStringToResult = null;
         }
         if (newTrace != null) {
-            StringBuilder sb = new StringBuilder();
-            for (Transition trans : newTrace.getNextTransitions()) {
-                sb.append(trans.getName()).append(" ").append(trans.getParameterPredicate()).append(" ");
-            }
-            LOGGER.info("The following transitions are available: {}", sb);
             Map<IEvalElement, AbstractEvalResult> newValues = newTrace.getCurrentState().getValues();
             newStringToResult = newValues.keySet().stream()
                     .filter(element -> element instanceof EventB)
@@ -69,32 +64,38 @@ public class VisualizationModel {
     }
 
     public boolean hasChanged(String formula) {
+        LOGGER.debug("Look up if the formula \"{}\" has changed its value.", formula);
         if (oldTrace == null) {
+            LOGGER.debug("The old trace is null, so the value of formula \"{}\" has changed.", formula);
             return true;
         }
 
-        EvalResult oldValue = null;
-        EvalResult newValue = null;
+        EvalResult oldValue;
+        EvalResult newValue;
 
         if (oldStringToResult.containsKey(formula)) {
             oldValue = oldStringToResult.get(formula);
         } else {
-            AbstractEvalResult oldResult = oldTrace.evalCurrent(new EventB(formula));
-            if (oldResult instanceof EvalResult) {
-                oldValue = (EvalResult) oldResult;
-            }
+            oldValue = evalState(oldTrace.getCurrentState(), formula);
         }
-        if (newStringToResult.containsKey(formula)) {
-           newValue = newStringToResult.get(formula);
-        } else {
-            AbstractEvalResult newResult = newTrace.evalCurrent(new EventB(formula));
-            if (newResult instanceof EvalResult) {
-                newValue = (EvalResult) newResult;
-            }
-        }
-        if (newValue == null) return false;
-        if (oldValue == null) return true;
 
+        if (newStringToResult.containsKey(formula)) {
+            newValue = newStringToResult.get(formula);
+        } else {
+            newValue = evalState(newTrace.getCurrentState(), formula);
+        }
+
+        if (newValue == null) {
+            LOGGER.debug("The value of formula \"{}\" couldn't be evaluated in the new trace. Returning false.", formula);
+            return false;
+        }
+
+        if (oldValue == null) {
+            LOGGER.debug("The value of formula \"{}\" couldn't be evaluated in the old trace, but in the new trace. Returning true.", formula);
+            return true;
+        }
+
+        LOGGER.debug("The value of formula \"{}\" could be evaluated for the new and the old trace.", formula);
         return !oldValue.getValue().equals(newValue.getValue());
     }
 
@@ -117,21 +118,29 @@ public class VisualizationModel {
 
     public boolean executeEvent(String event, String... predicates) {
         Trace currentTrace = this.currentTrace.get();
+        LOGGER.debug("Try to execute event \"{}\" with predicates: {}.", event, String.join(" ", predicates));
         if (currentTrace.canExecuteEvent(event, predicates)) {
+            LOGGER.debug("Event \"{}\" is executable. Execute it.");
             Trace resultTrace = currentTrace.execute(event, predicates);
             this.currentTrace.set(resultTrace);
             return true;
         }
+        LOGGER.debug("Event \"{}\" is not executable.");
         return false;
     }
 
     private Object evalCurrent(String formula) {
+        EvalResult value = evalState(newTrace.getCurrentState(), formula);
+        return value != null ? value.translate().getValue() : null;
+    }
+
+    private EvalResult evalState(State state, String formula) {
+        LOGGER.debug("Try to evaluate formula {}.", formula);
         try {
-            AbstractEvalResult evalResult = newTrace.evalCurrent(new EventB(formula, Collections.emptySet(), FormulaExpand.EXPAND));
-            LOGGER.debug("Evaluated formula {} and got the result: {}", formula, evalResult);
+            AbstractEvalResult evalResult = state.eval(new EventB(formula, Collections.emptySet(), FormulaExpand.EXPAND));
+            LOGGER.debug("Evaluated formula \"{}\" and got the result: {}", formula, evalResult);
             if (evalResult instanceof EvalResult) {
-                EvalResult value = (EvalResult) evalResult;
-                return value.translate().getValue();
+                return (EvalResult) evalResult;
             }
             return null;
         } catch (EvaluationException evalException) {
@@ -144,19 +153,16 @@ public class VisualizationModel {
             LOGGER.warn("EvaluationException while evaluating the formula \"" + formula +"\".", evalException);
             return null;
         }
-
     }
 
     public Object getPreviousValue(String formula) {
+        LOGGER.debug("Try to get previous value of formula \"{}\".", formula);
         if (newTrace.getPreviousState() != null) {
-            AbstractEvalResult evalResult = newTrace.getPreviousState()
-                    .eval(new EventB(formula, Collections.emptySet(), FormulaExpand.EXPAND));
-            if (evalResult instanceof EvalResult) {
-                EvalResult value = (EvalResult) evalResult;
-                TranslatedEvalResult translatedValue = value.translate();
-                return translatedValue.getValue();
-            }
+            EvalResult value = evalState(newTrace.getPreviousState(), formula);
+            LOGGER.debug("Evaluated previous value of formula \"{}\" and got the result: {}", formula, value);
+            return value != null ? value.translate().getValue() : null;
         }
+        LOGGER.debug("The previous state is null. Returning null");
         return null;
     }
 }

@@ -75,7 +75,7 @@ public class VisualizationPlugin extends ProBPlugin {
                     model = newModel;
                     visualizationPossible.set(true);
                     if (visualizationRunning.get()) {
-                        //TODO: better alert message
+                        //TODO: better alert message and check if the visualization can work with the new model
                         Alert alert = stageManager.makeAlert(Alert.AlertType.INFORMATION,
                                 "Stopping the visualization because the used model changed.",
                                 ButtonType.OK);
@@ -89,7 +89,7 @@ public class VisualizationPlugin extends ProBPlugin {
                 visualizationPossible.setValue(false);
                 if (visualizationRunning.get()) {
                     Alert alert = stageManager.makeAlert(Alert.AlertType.INFORMATION,
-                            "Stopping the visualization because the used model changed.",
+                            "The model was unloaded, so the visualization is also stopped.",
                             ButtonType.OK);
                     alert.initOwner(stageManager.getCurrent());
                     alert.show();
@@ -218,10 +218,7 @@ public class VisualizationPlugin extends ProBPlugin {
     private void startVisualization(Visualization loadedVisualization) {
         LOGGER.debug("Starting the visualization \"{}\"", loadedVisualization.getName());
         //TODO check if the new visualization is for the used model
-        /*if (loadedVisualization.getModels() != null &&
-                Arrays.asList(loadedVisualization.getModels()).contains(model)) {*/
-            System.out.println(model + " from file " + model.getModelFile().getName());
-        //}
+        System.out.println(model + " from file " + model.getModelFile().getName());
         if (visualization != null) {
             stopVisualization();
         }
