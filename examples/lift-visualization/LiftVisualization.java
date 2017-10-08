@@ -63,11 +63,11 @@ public class LiftVisualization extends Visualization{
 
         Line line1 = new Line(19, 240, 289, 240);
         line1.setStroke(Color.BLACK);
-        line1.getStrokeDashArray().addAll(2d);
+        line1.getStrokeDashArray().addAll(4d);
 
         Line line2 = new Line(19, 130, 289, 130);
         line2.setStroke(Color.BLACK);
-        line2.getStrokeDashArray().addAll(2d);
+        line2.getStrokeDashArray().addAll(4d);
 
 
         Text floor2 = new Text(288, 68, "Floor 2");

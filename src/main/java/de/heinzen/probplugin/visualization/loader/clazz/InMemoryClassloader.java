@@ -10,7 +10,7 @@ public class InMemoryClassloader extends ClassLoader {
 
     private final Map<String, InMemoryJavaFileObject> classFiles = new HashMap<>();
 
-    InMemoryClassloader(ClassLoader parentClassLoader) {
+    public InMemoryClassloader(ClassLoader parentClassLoader) {
         super(parentClassLoader);
     }
 

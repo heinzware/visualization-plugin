@@ -9,16 +9,15 @@ import java.util.Arrays;
  */
 public class InMemoryCompiler {
 
-    public Class<?> compile(String className, File javaClassFile, String classpath, ClassLoader pluginClassloader) throws Exception{
+    public Class<?> compile(String className, File javaClassFile, String classpath, InMemoryClassloader classloader) throws Exception{
         // create complete classpath
         classpath = (System.getProperty("java.class.path") + File.pathSeparator + classpath)
                 .replaceAll("%20", " ");
 
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
-        InMemoryClassloader classLoader = new InMemoryClassloader(pluginClassloader);
 
-        try (JavaFileManager inMemoryFileManager = new InMemoryJavaFileManager(compiler, classLoader, diagnostics);
+        try (JavaFileManager inMemoryFileManager = new InMemoryJavaFileManager(compiler, classloader, diagnostics);
              StandardJavaFileManager fileManager = compiler.getStandardFileManager(diagnostics, null, null)) {
 
             Iterable<? extends JavaFileObject> units = fileManager.getJavaFileObjects(javaClassFile);
@@ -33,7 +32,7 @@ public class InMemoryCompiler {
             }
 
         }
-        return Class.forName(className, true, classLoader);
+        return Class.forName(className, true, classloader);
     }
 
     private String formatCompilerErrors(DiagnosticCollector<JavaFileObject> diagnostics) {

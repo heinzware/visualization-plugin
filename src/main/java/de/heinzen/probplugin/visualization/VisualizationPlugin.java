@@ -162,6 +162,8 @@ public class VisualizationPlugin extends ProBPlugin {
             Visualization loadedVisualization = visualizationLoader.loadVisualization(selectedVisualization);
             if (loadedVisualization != null) {
                 startVisualization(loadedVisualization);
+            } else {
+                visualizationLoader.close();
             }
         }
     }
@@ -250,6 +252,7 @@ public class VisualizationPlugin extends ProBPlugin {
             }
             visualization.stop();
             visualization = null;
+            visualizationLoader.close();
             visualizationRunning.set(false);
             visualizationTab.setContent(createPlaceHolderContent());
             visualizationTab.setText("BMotion");

@@ -2,6 +2,7 @@ package de.heinzen.probplugin.visualization.loader;
 
 import com.google.common.io.Files;
 import de.heinzen.probplugin.visualization.Visualization;
+import de.heinzen.probplugin.visualization.loader.clazz.InMemoryClassloader;
 import de.heinzen.probplugin.visualization.loader.clazz.InMemoryCompiler;
 import de.prob2.ui.internal.StageManager;
 import javafx.scene.control.Alert;
@@ -10,7 +11,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ro.fortsoft.pf4j.PluginClassLoader;
 
+import java.io.Closeable;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Enumeration;
@@ -31,6 +34,8 @@ public class VisualizationLoader {
     private final StageManager stageManager;
     private final PluginClassLoader pluginClassLoader;
     private final String pluginClassPath;
+
+    private ClassLoader visualizationClassloader;
 
     public VisualizationLoader(StageManager stageManager, PluginClassLoader pluginClassLoader) {
         this.stageManager = stageManager;
@@ -69,8 +74,12 @@ public class VisualizationLoader {
             LOGGER.debug("Try to compile file {} using plugin-classpath\n{}.", fileName, pluginClassPath);
             String className = fileName.replace(".java", "");
 
+
+            InMemoryClassloader classLoader = new InMemoryClassloader(pluginClassLoader);
+            visualizationClassloader = classLoader;
+
             Class visualizationClass = new InMemoryCompiler()
-                    .compile(className, selectedVisualization, pluginClassPath, pluginClassLoader);
+                    .compile(className, selectedVisualization, pluginClassPath, classLoader);
 
             LOGGER.debug("Successfully compiled class {}.", className);
 
@@ -93,12 +102,24 @@ public class VisualizationLoader {
         }
     }
 
+    public void close() {
+        if (visualizationClassloader != null && visualizationClassloader instanceof Closeable) {
+            try {
+                ((Closeable) visualizationClassloader).close();
+            } catch (IOException e) {
+                LOGGER.warn("VisualizationLoader: Cannot close classloader!", e);
+            }
+        }
+    }
+
     private Visualization loadVisualizationJar(File selectedVisualization) {
         String fileName = selectedVisualization.getName();
         try {
             JarFile selectedVisualizationJar = new JarFile(selectedVisualization);
             URL[]  urls = new URL[]{ new URL("jar:file:" + selectedVisualizationJar.getName() +"!/") };
-            URLClassLoader classLoader = URLClassLoader.newInstance(urls, pluginClassLoader);
+            URLClassLoader classloader = URLClassLoader.newInstance(urls, pluginClassLoader);
+
+            visualizationClassloader = classloader;
 
             Class visualizationClass = null;
             String className = null;
@@ -110,7 +131,7 @@ public class VisualizationLoader {
                 }
                 className = jarEntry.getName().substring(0, jarEntry.getName().length() - 6);
                 className = className.replace('/', '.');
-                visualizationClass = classLoader.loadClass(className);
+                visualizationClass = classloader.loadClass(className);
                 if (checkVisualizationClass(visualizationClass)) {
                     break;
                 }
