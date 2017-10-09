@@ -102,12 +102,14 @@ public class VisualizationLoader {
         }
     }
 
-    public void close() {
+    public void closeClassloader() {
+        LOGGER.debug("Try to close visualization classloader.");
         if (visualizationClassloader != null && visualizationClassloader instanceof Closeable) {
             try {
+                LOGGER.debug("Classloader implements closeable, so close it!");
                 ((Closeable) visualizationClassloader).close();
             } catch (IOException e) {
-                LOGGER.warn("VisualizationLoader: Cannot close classloader!", e);
+                LOGGER.warn("VisualizationLoader: Cannot closeClassloader classloader!", e);
             }
         }
     }

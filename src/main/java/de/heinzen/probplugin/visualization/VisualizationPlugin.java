@@ -10,6 +10,7 @@ import de.prob2.ui.internal.StageManager;
 import de.prob2.ui.plugin.ProBPlugin;
 import de.prob2.ui.prob2fx.CurrentTrace;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -26,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -42,7 +44,6 @@ public class VisualizationPlugin extends ProBPlugin {
 
     private Tab visualizationTab;
     private Menu visualizationMenu;
-    private Visualization visualization;
     private VisualizationModel visualizationModel;
     private VisualizationLoader visualizationLoader;
 
@@ -54,8 +55,8 @@ public class VisualizationPlugin extends ProBPlugin {
     private HashMap<String, List<FormulaListener>> formulaListenerMap;
     private HashMap<String, EventListener> eventListenerMap;
     private AbstractModel model;
+    private SimpleObjectProperty<Visualization> visualization = new SimpleObjectProperty<>(null);
     private SimpleBooleanProperty visualizationPossible = new SimpleBooleanProperty(false);
-    private SimpleBooleanProperty visualizationRunning  = new SimpleBooleanProperty(false);
 
     public VisualizationPlugin(PluginWrapper pluginWrapper) {
         super(pluginWrapper);
@@ -74,25 +75,26 @@ public class VisualizationPlugin extends ProBPlugin {
                 if (!newModel.equals(model)) {
                     model = newModel;
                     visualizationPossible.set(true);
-                    if (visualizationRunning.get()) {
-                        //TODO: better alert message and check if the visualization can work with the new model
-                        Alert alert = stageManager.makeAlert(Alert.AlertType.INFORMATION,
-                                "Stopping the visualization because the used model changed.",
-                                ButtonType.OK);
-                        alert.initOwner(stageManager.getCurrent());
-                        alert.show();
-                        stopVisualization();
+                    if (visualization.isNotNull().get()) {
+                        boolean start = checkModel(newModel.getModelFile().getName(), visualization.get().getModels());
+                        if (start) {
+                            visualization.get().initialize(visualizationTab);
+                        } else {
+                            showAlert(Alert.AlertType.INFORMATION,
+                                    "A new model was loaded and " +
+                                            "this model does not work with the loaded visualization. So the visualization will be stopped.",
+                                    ButtonType.OK);
+                            stopVisualization();
+                        }
                     }
                 }
             } else {
                 model = null;
                 visualizationPossible.setValue(false);
-                if (visualizationRunning.get()) {
-                    Alert alert = stageManager.makeAlert(Alert.AlertType.INFORMATION,
-                            "The model was unloaded, so the visualization is also stopped.",
+                if (visualization.isNotNull().get()) {
+                    showAlert(Alert.AlertType.INFORMATION,
+                            "The animation was stopped, so the visualization is also stopped.",
                             ButtonType.OK);
-                    alert.initOwner(stageManager.getCurrent());
-                    alert.show();
                     stopVisualization();
                 }
             }
@@ -104,7 +106,7 @@ public class VisualizationPlugin extends ProBPlugin {
                     visualizationModel.setTraces(oldTrace, newTrace);
                     if (newTrace.getPreviousState() == null || !newTrace.getPreviousState().isInitialised()) {
                         //the model was initialized in the last event, so constants could have changed
-                        visualization.initialize(visualizationTab);
+                        visualization.get().initialize(visualizationTab);
                     }
                     updateVisualization();
                 }
@@ -116,12 +118,12 @@ public class VisualizationPlugin extends ProBPlugin {
 
     @Override
     public String getName() {
-        return "Visualization Plugin (BMotion)";
+        return "VisualizationFX";
     }
 
     @Override
     public void startPlugin() {
-        visualizationTab = new Tab("BMotion", createPlaceHolderContent());
+        visualizationTab = new Tab("VisualizationFX", createPlaceHolderContent());
         getProBConnection().addTab(visualizationTab);
         visualizationMenu = loadMenu();
         if (visualizationMenu != null) {
@@ -141,8 +143,8 @@ public class VisualizationPlugin extends ProBPlugin {
         return visualizationPossible;
     }
 
-    public SimpleBooleanProperty visualizationRunningProperty() {
-        return visualizationRunning;
+    public SimpleObjectProperty<Visualization> visualizationProperty() {
+        return visualization;
     }
 
     public void openVisualization() {
@@ -163,7 +165,7 @@ public class VisualizationPlugin extends ProBPlugin {
             if (loadedVisualization != null) {
                 startVisualization(loadedVisualization);
             } else {
-                visualizationLoader.close();
+                visualizationLoader.closeClassloader();
             }
         }
     }
@@ -220,29 +222,47 @@ public class VisualizationPlugin extends ProBPlugin {
     private void startVisualization(Visualization loadedVisualization) {
         LOGGER.debug("Starting the visualization \"{}\"", loadedVisualization.getName());
         //TODO check if the new visualization is for the used model
-        System.out.println(model + " from file " + model.getModelFile().getName());
-        if (visualization != null) {
-            stopVisualization();
+        boolean start = checkModel(model.getModelFile().getName(), loadedVisualization.getModels());
+        if (!start) {
+            showAlert(Alert.AlertType.INFORMATION, "The visualization \"" + loadedVisualization.getName() +
+                    "\" does not work with the the model.\n\n" +
+                    "The visualization won't be loaded.",
+                    ButtonType.OK);
+            return;
         }
-        visualization = loadedVisualization;
-        visualization.setController(this);
-        visualization.setModel(visualizationModel);
-        visualizationTab.setText(visualization.getName());
-        visualization.registerFormulaListener();
-        visualization.registerEventListener();
+        if (visualization.isNotNull().get()) {
+            Alert alert = stageManager.makeAlert(Alert.AlertType.CONFIRMATION,
+                    "The visualization \"" + visualization.get().getName() +
+                            "\" is already loaded.\n\nDo you want to replace it with the visualization \"" +
+                            loadedVisualization.getName() + "\"?",
+                    ButtonType.YES, ButtonType.NO);
+            alert.setTitle("VisualizationFX");
+            alert.initOwner(stageManager.getCurrent());
+            Optional<ButtonType> alertResult = alert.showAndWait();
+            if (alertResult.isPresent() && alertResult.get() == ButtonType.YES) {
+                stopVisualization();
+            } else {
+                return;
+            }
+        }
+        visualization.set(loadedVisualization);
+        loadedVisualization.setController(this);
+        loadedVisualization.setModel(visualizationModel);
+        visualizationTab.setText(loadedVisualization.getName());
+        loadedVisualization.registerFormulaListener();
+        loadedVisualization.registerEventListener();
         if (currentTrace.getCurrentState() != null && currentTrace.getCurrentState().isInitialised()) {
             LOGGER.debug("Start: The current state is initialised, call initialize() of visualization.");
             visualizationModel.setTraces(null, currentTrace.get());
-            visualization.initialize(visualizationTab);
+            loadedVisualization.initialize(visualizationTab);
             updateVisualization();
         }
         currentTrace.addListener(currentTraceChangeListener);
-        visualizationRunning.set(true);
     }
 
     public void stopVisualization() {
-        if (visualizationRunning.get()) {
-            LOGGER.debug("Stopping visualization \"{}\"!", visualization.getName());
+        if (visualization.isNotNull().get()) {
+            LOGGER.debug("Stopping visualization \"{}\"!", visualization.get().getName());
             currentTrace.removeListener(currentTraceChangeListener);
             if (formulaListenerMap != null && !formulaListenerMap.isEmpty()) {
                 formulaListenerMap.clear();
@@ -250,12 +270,11 @@ public class VisualizationPlugin extends ProBPlugin {
             if (eventListenerMap != null && !eventListenerMap.isEmpty()) {
                 eventListenerMap.clear();
             }
-            visualization.stop();
-            visualization = null;
-            visualizationLoader.close();
-            visualizationRunning.set(false);
+            visualization.get().stop();
+            visualizationLoader.closeClassloader();
+            visualization.set(null);
             visualizationTab.setContent(createPlaceHolderContent());
-            visualizationTab.setText("BMotion");
+            visualizationTab.setText("VisualizationFX");
         }
     }
 
@@ -313,5 +332,21 @@ public class VisualizationPlugin extends ProBPlugin {
                 eventListenerMap.get(lastEvent).eventExcecuted();
             }
         }
+    }
+
+    private boolean checkModel(String modelFile, String[] models) {
+        LOGGER.debug("Checking the model. Model-file is \"{}\" and models are \"{}\"", modelFile, models);
+        boolean start = true;
+        if (models != null && models.length != 0) {
+            start = Arrays.asList(models).contains(modelFile);
+        }
+        return start;
+    }
+
+    private void showAlert(Alert.AlertType type, String content, ButtonType... buttons) {
+        Alert alert = stageManager.makeAlert(type, content, buttons);
+        alert.setTitle("VisualizationFX");
+        alert.initOwner(stageManager.getCurrent());
+        alert.show();
     }
 }

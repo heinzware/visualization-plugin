@@ -33,17 +33,20 @@ public class VisualizationMenu extends Menu{
 
     @FXML
     public void initialize() {
+        LOGGER.debug("Initializing the visualization-menu!");
         openVisualizationItem.disableProperty().bind(Bindings.not(plugin.visualizationPossibleProperty()));
-        stopVisualizationItem.disableProperty().bind(Bindings.not(plugin.visualizationRunningProperty()));
+        stopVisualizationItem.disableProperty().bind(plugin.visualizationProperty().isNull());
     }
 
     @FXML
     private void stopVisualization(){
+        LOGGER.debug("Stop menu-item called.");
         plugin.stopVisualization();
     }
 
     @FXML
     private void openVisualization(){
+        LOGGER.debug("Open menu-item called.");
         plugin.openVisualization();
     }
 

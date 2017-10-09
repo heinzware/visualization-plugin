@@ -97,7 +97,7 @@ public class LiftVisualization extends Visualization{
 
     @Override
     protected String[] getModels() {
-        return new String[]{"test"};
+        return new String[]{"MLift.bcm"};
     }
 
     @Override

@@ -3,7 +3,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuItem?>
 
-<fx:root type="Menu" text="BMotion" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root type="Menu" text="VisualizationFX" xmlns:fx="http://javafx.com/fxml/1">
     <MenuItem fx:id="openVisualizationItem" text="Select Visualization" onAction="#openVisualization"/>
     <MenuItem fx:id="stopVisualizationItem" text="Stop Visualization" onAction="#stopVisualization"/>
 </fx:root>
