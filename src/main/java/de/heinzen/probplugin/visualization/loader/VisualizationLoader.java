@@ -4,6 +4,7 @@ import com.google.common.io.Files;
 import de.heinzen.probplugin.visualization.Visualization;
 import de.heinzen.probplugin.visualization.loader.clazz.InMemoryClassloader;
 import de.heinzen.probplugin.visualization.loader.clazz.InMemoryCompiler;
+import de.heinzen.probplugin.visualization.loader.clazz.InMemoryCompilerException;
 import de.prob2.ui.internal.StageManager;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -88,15 +89,20 @@ public class VisualizationLoader {
                 return (Visualization) visualizationClass.newInstance();
             } else {
                 LOGGER.warn("Class {} does not extend the abstract class Visualization.", className);
-                showAlert(Alert.AlertType.WARNING,
+                showAlert(false, Alert.AlertType.WARNING,
                         "The class \"%s\" does not extend the abstract class Visualization. It is no valid visualization.",
                         className);
                 return null;
             }
 
+        } catch (InMemoryCompilerException e) {
+            LOGGER.warn("Exception while compiling the class \"{}\".", fileName, e);
+            showAlert(true, Alert.AlertType.WARNING, "Could not compile the class \"" +
+            fileName + "\".\n" + e.getCompilerMessage(), ButtonType.OK);
+            return null;
         } catch (Exception e) {
             LOGGER.warn("Exception while loading the visualization:\n{}", fileName, e);
-            showAlert(Alert.AlertType.ERROR,
+            showAlert(false, Alert.AlertType.ERROR,
                     "Exception while loading the visualization.\n\nThe thrown exception is shown in the Log-file.");
             return null;
         }
@@ -145,14 +151,14 @@ public class VisualizationLoader {
 
             } else {
                 LOGGER.warn("No visualization-class found in jar: {}", fileName);
-                showAlert(Alert.AlertType.WARNING,
+                showAlert(false, Alert.AlertType.WARNING,
                         "No visualization-class found!\n\nThe jar \"%s\" is not a valid visualization.",
                         fileName);
                 return null;
             }
         } catch (Exception e) {
             LOGGER.warn("Exception while loading the visualization:\n{}", fileName, e);
-            showAlert(Alert.AlertType.ERROR,
+            showAlert(false, Alert.AlertType.ERROR,
                     "Exception while loading the visualization.\n\nThe thrown exception is shown in the Log-file.");
             return null;
         }
@@ -164,11 +170,13 @@ public class VisualizationLoader {
                 visualizationClass.getSuperclass().equals(Visualization.class);
     }
 
-    private void showAlert(Alert.AlertType type, String text, Object... textParams) {
+    private void showAlert(boolean resizable, Alert.AlertType type, String text, Object... textParams) {
         Alert alert = stageManager.makeAlert(type,
                 String.format(text, textParams),
                 ButtonType.OK);
         alert.initOwner(stageManager.getCurrent());
+        alert.setTitle("VisualizationFX");
+        alert.setResizable(resizable);
         alert.show();
     }
 }

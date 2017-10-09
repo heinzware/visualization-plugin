@@ -2,6 +2,7 @@ package de.heinzen.probplugin.visualization.loader.clazz;
 
 import javax.tools.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 /**
@@ -9,7 +10,8 @@ import java.util.Arrays;
  */
 public class InMemoryCompiler {
 
-    public Class<?> compile(String className, File javaClassFile, String classpath, InMemoryClassloader classloader) throws Exception{
+    public Class<?> compile(String className, File javaClassFile, String classpath, InMemoryClassloader classloader)
+            throws InMemoryCompilerException, IOException, ClassNotFoundException{
         // create complete classpath
         classpath = (System.getProperty("java.class.path") + File.pathSeparator + classpath)
                 .replaceAll("%20", " ");
@@ -28,27 +30,10 @@ public class InMemoryCompiler {
 
             //compile and throw exception when an error occurs
             if (!task.call()) {
-                throw new Exception(formatCompilerErrors(diagnostics));
+                throw new InMemoryCompilerException(className, diagnostics);
             }
 
         }
         return Class.forName(className, true, classloader);
     }
-
-    private String formatCompilerErrors(DiagnosticCollector<JavaFileObject> diagnostics) {
-        StringBuilder sb = new StringBuilder("\n\tErrors during compilation:\n\n\t\t");
-        for (Diagnostic<?> diagnostic : diagnostics.getDiagnostics()) {
-            sb.append("Kind: ").append(diagnostic.getKind()).append("\n\t\t")
-                    .append("Source: ").append(diagnostic.getSource()).append("\n\t\t")
-                    .append("Code and Message: ").append(diagnostic.getCode()).append(": ")
-                    .append(diagnostic.getMessage(null)).append("\n\t\t")
-                    .append("Line: ").append(diagnostic.getLineNumber()).append("\n\t\t")
-                    .append("Position/Column: ").append(diagnostic.getPosition()).append("/")
-                    .append(diagnostic.getColumnNumber()).append("\n\t\t")
-                    .append("Startpostion/Endposition: ").append(diagnostic.getStartPosition()).append("/")
-                    .append(diagnostic.getEndPosition()).append("\n\n\t\t");
-        }
-        return sb.toString();
-    }
-
 }

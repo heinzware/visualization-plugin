@@ -12,7 +12,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import de.heinzen.probplugin.visualization.Visualization;
 import de.heinzen.probplugin.visualization.listener.FormulaListener;
-import de.prob.translator.types.BigInteger;
+//import de.prob.translator.types.BigInteger;
 
 
 /**
