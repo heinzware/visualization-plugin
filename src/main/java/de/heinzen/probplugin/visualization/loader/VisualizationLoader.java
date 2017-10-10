@@ -21,6 +21,8 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import static de.heinzen.probplugin.visualization.VisualizationPlugin.PLUGIN_NAME;
+
 /**
  * Description of class
  *
@@ -175,7 +177,7 @@ public class VisualizationLoader {
                 String.format(text, textParams),
                 ButtonType.OK);
         alert.initOwner(stageManager.getCurrent());
-        alert.setTitle("VisualizationFX");
+        alert.setTitle(PLUGIN_NAME);
         alert.setResizable(resizable);
         alert.show();
     }

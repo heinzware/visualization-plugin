@@ -40,6 +40,8 @@ public class VisualizationPlugin extends ProBPlugin {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(VisualizationMenu.class);
 
+    public static final String PLUGIN_NAME = "VisualizationFX";
+
     private Tab visualizationTab;
     private Menu visualizationMenu;
     private VisualizationModel visualizationModel;
@@ -109,12 +111,12 @@ public class VisualizationPlugin extends ProBPlugin {
 
     @Override
     public String getName() {
-        return "VisualizationFX";
+        return PLUGIN_NAME;
     }
 
     @Override
     public void startPlugin() {
-        visualizationTab = new Tab("VisualizationFX", createPlaceHolderContent());
+        visualizationTab = new Tab(PLUGIN_NAME, createPlaceHolderContent());
         getProBConnection().addTab(visualizationTab);
         visualizationMenu = loadMenu();
         if (visualizationMenu != null) {
@@ -226,19 +228,15 @@ public class VisualizationPlugin extends ProBPlugin {
 
     private void startVisualization(Visualization loadedVisualization) {
         LOGGER.debug("Starting the visualization \"{}\"", loadedVisualization.getName());
-        //TODO check if the new visualization is for the used model
         boolean start = checkMachine(loadedVisualization.getMachines());
         if (!start) {
             showAlert(Alert.AlertType.INFORMATION, "The visualization \"" + loadedVisualization.getName() +
-                    "\" does not work with the the model.\n\n" +
+                    "\" does not work with the the animated machine \"" + currentMachine.get().getName() + "\".\n\n" +
                     "The visualization won't be loaded.",
                     ButtonType.OK);
             visualizationLoader.closeClassloader();
             return;
         }
-        /*if (visualization.isNotNull().get()) {
-           stopVisualization();
-        }*/
         visualization.set(loadedVisualization);
         loadedVisualization.setController(this);
         loadedVisualization.setModel(visualizationModel);
@@ -268,7 +266,7 @@ public class VisualizationPlugin extends ProBPlugin {
             visualizationLoader.closeClassloader();
             visualization.set(null);
             visualizationTab.setContent(createPlaceHolderContent());
-            visualizationTab.setText("VisualizationFX");
+            visualizationTab.setText(PLUGIN_NAME);
         }
     }
 
@@ -339,7 +337,7 @@ public class VisualizationPlugin extends ProBPlugin {
 
     private void showAlert(Alert.AlertType type, String content, ButtonType... buttons) {
         Alert alert = stageManager.makeAlert(type, content, buttons);
-        alert.setTitle("VisualizationFX");
+        alert.setTitle(PLUGIN_NAME);
         alert.initOwner(stageManager.getCurrent());
         alert.show();
     }
