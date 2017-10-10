@@ -19,7 +19,7 @@ public abstract class Visualization {
 
     protected abstract String getName();
 
-    protected abstract String[] getModels();
+    protected abstract String[] getMachines();
 
     protected abstract void initialize(Tab tab);
 

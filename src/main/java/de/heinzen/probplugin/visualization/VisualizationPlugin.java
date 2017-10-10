@@ -4,12 +4,13 @@ import de.heinzen.probplugin.visualization.listener.EventListener;
 import de.heinzen.probplugin.visualization.listener.FormulaListener;
 import de.heinzen.probplugin.visualization.loader.VisualizationLoader;
 import de.heinzen.probplugin.visualization.menu.VisualizationMenu;
-import de.prob.model.representation.AbstractModel;
 import de.prob.statespace.Trace;
 import de.prob2.ui.internal.StageManager;
 import de.prob2.ui.plugin.ProBPlugin;
+import de.prob2.ui.prob2fx.CurrentProject;
 import de.prob2.ui.prob2fx.CurrentTrace;
-import javafx.beans.property.SimpleBooleanProperty;
+import de.prob2.ui.project.machines.Machine;
+import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXMLLoader;
@@ -27,9 +28,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * Description of clazz
@@ -48,52 +46,45 @@ public class VisualizationPlugin extends ProBPlugin {
     private VisualizationLoader visualizationLoader;
 
     private final ChangeListener<Trace> currentTraceChangeListener;
-    private final ChangeListener<AbstractModel> modelChangeListener;
     private final StageManager stageManager;
     private final CurrentTrace currentTrace;
+    private final ReadOnlyObjectProperty<Machine> currentMachine;
+    private final ChangeListener<Machine> machineListener;
 
     private HashMap<String, List<FormulaListener>> formulaListenerMap;
     private HashMap<String, EventListener> eventListenerMap;
-    private AbstractModel model;
     private SimpleObjectProperty<Visualization> visualization = new SimpleObjectProperty<>(null);
-    private SimpleBooleanProperty visualizationPossible = new SimpleBooleanProperty(false);
 
     public VisualizationPlugin(PluginWrapper pluginWrapper) {
         super(pluginWrapper);
 
         stageManager = getInjector().getInstance(StageManager.class);
         currentTrace = getInjector().getInstance(CurrentTrace.class);
+        currentMachine = getInjector().getInstance(CurrentProject.class).currentMachineProperty();
         visualizationModel = new VisualizationModel(currentTrace, stageManager);
 
-        if (currentTrace.getModel() != null) {
-            model = currentTrace.getModel();
-            visualizationPossible.set(true);
-        }
-
-        modelChangeListener = (observable, oldModel, newModel) -> {
-            if (newModel != null) {
-                if (!newModel.equals(model)) {
-                    model = newModel;
-                    visualizationPossible.set(true);
-                    if (visualization.isNotNull().get()) {
-                        boolean start = checkModel(newModel.getModelFile().getName(), visualization.get().getModels());
-                        if (start) {
-                            visualization.get().initialize(visualizationTab);
-                        } else {
-                            showAlert(Alert.AlertType.INFORMATION,
-                                    "A new model was loaded and " +
-                                            "this model does not work with the loaded visualization. So the visualization will be stopped.",
-                                    ButtonType.OK);
-                            stopVisualization();
-                        }
+        machineListener = (observable, oldMachine, newMachine) -> {
+            if (newMachine != null) {
+                if (!newMachine.equals(oldMachine) && visualization.isNotNull().get()) {
+                    boolean start = checkMachine(visualization.get().getMachines());
+                    if (start) {
+                        visualization.get().initialize(visualizationTab);
+                    } else {
+                        showAlert(Alert.AlertType.INFORMATION,
+                                "The machine \"" + newMachine.getName() + "\" was loaded and " +
+                                        "does not work with the loaded visualization \"" +
+                                        visualization.get().getName() + "\". So the visualization will be stopped.",
+                                ButtonType.OK);
+                        stopVisualization();
                     }
+
                 }
             } else {
-                model = null;
-                visualizationPossible.setValue(false);
                 if (visualization.isNotNull().get()) {
                     showAlert(Alert.AlertType.INFORMATION,
-                            "The animation was stopped, so the visualization is also stopped.",
+                            "The animation of the machine \"" + oldMachine.getName() +
+                                    "\" was stopped, so the visualization \"" + visualization.get().getName() +
+                                    "\" will be stopped.",
                             ButtonType.OK);
                     stopVisualization();
                 }
@@ -113,7 +104,7 @@ public class VisualizationPlugin extends ProBPlugin {
             }
         };
 
-        currentTrace.modelProperty().addListener(modelChangeListener);
+        currentMachine.addListener(machineListener);
     }
 
     @Override
@@ -135,12 +126,12 @@ public class VisualizationPlugin extends ProBPlugin {
     public void stopPlugin() {
         getProBConnection().removeTab(visualizationTab);
         getProBConnection().removeMenu(visualizationMenu);
-        currentTrace.modelProperty().removeListener(modelChangeListener);
+        currentMachine.removeListener(machineListener);
         stopVisualization();
     }
 
-    public SimpleBooleanProperty visualizationPossibleProperty() {
-        return visualizationPossible;
+    public ReadOnlyObjectProperty<Machine> currentMachineProperty() {
+        return currentMachine;
     }
 
     public SimpleObjectProperty<Visualization> visualizationProperty() {
@@ -148,6 +139,20 @@ public class VisualizationPlugin extends ProBPlugin {
     }
 
     public void openVisualization() {
+        if (visualization.isNotNull().get()) {
+            Alert alert = stageManager.makeAlert(Alert.AlertType.CONFIRMATION,
+                    "The visualization \"" + visualization.get().getName() +
+                            "\" is already loaded.\n\nDo you want to replace the loaded visualization with another one?",
+                    ButtonType.YES, ButtonType.NO);
+            alert.setTitle("VisualizationFX");
+            alert.initOwner(stageManager.getCurrent());
+            Optional<ButtonType> alertResult = alert.showAndWait();
+            if (alertResult.isPresent() && alertResult.get() == ButtonType.YES) {
+                stopVisualization();
+            } else {
+                return;
+            }
+        }
         LOGGER.debug("Show filechooser to select a visualization.");
         final FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select a visualization");
@@ -222,29 +227,18 @@ public class VisualizationPlugin extends ProBPlugin {
     private void startVisualization(Visualization loadedVisualization) {
         LOGGER.debug("Starting the visualization \"{}\"", loadedVisualization.getName());
         //TODO check if the new visualization is for the used model
-        boolean start = checkModel(model.getModelFile().getName(), loadedVisualization.getModels());
+        boolean start = checkMachine(loadedVisualization.getMachines());
         if (!start) {
             showAlert(Alert.AlertType.INFORMATION, "The visualization \"" + loadedVisualization.getName() +
                     "\" does not work with the the model.\n\n" +
                     "The visualization won't be loaded.",
                     ButtonType.OK);
+            visualizationLoader.closeClassloader();
             return;
         }
-        if (visualization.isNotNull().get()) {
-            Alert alert = stageManager.makeAlert(Alert.AlertType.CONFIRMATION,
-                    "The visualization \"" + visualization.get().getName() +
-                            "\" is already loaded.\n\nDo you want to replace it with the visualization \"" +
-                            loadedVisualization.getName() + "\"?",
-                    ButtonType.YES, ButtonType.NO);
-            alert.setTitle("VisualizationFX");
-            alert.initOwner(stageManager.getCurrent());
-            Optional<ButtonType> alertResult = alert.showAndWait();
-            if (alertResult.isPresent() && alertResult.get() == ButtonType.YES) {
-                stopVisualization();
-            } else {
-                return;
-            }
-        }
+        /*if (visualization.isNotNull().get()) {
+           stopVisualization();
+        }*/
         visualization.set(loadedVisualization);
         loadedVisualization.setController(this);
         loadedVisualization.setModel(visualizationModel);
@@ -282,13 +276,12 @@ public class VisualizationPlugin extends ProBPlugin {
         //first check which formulas have changed
         LOGGER.debug("Update visualization!");
         if (formulaListenerMap != null) {
-            List<String> changedFormulas = formulaListenerMap.keySet().stream()
-                    .filter(new Predicate<String>() {
-                        @Override
-                        public boolean test(String formula) {
-                            return visualizationModel.hasChanged(formula);
-                        }
-                    }).collect(Collectors.toList());
+            List<String> changedFormulas = new ArrayList<>();
+            for (String formula : formulaListenerMap.keySet()) {
+                if (visualizationModel.hasChanged(formula)) {
+                    changedFormulas.add(formula);
+                }
+            }
 
             LOGGER.debug("The following formulas have changed their values: {}", String.join(" ", changedFormulas));
 
@@ -334,11 +327,12 @@ public class VisualizationPlugin extends ProBPlugin {
         }
     }
 
-    private boolean checkModel(String modelFile, String[] models) {
-        LOGGER.debug("Checking the model. Model-file is \"{}\" and models are \"{}\"", modelFile, models);
+    private boolean checkMachine(String[] machines) {
+        String machineName = currentMachine.get().getName();
+        LOGGER.debug("Checking the machine. Current machine is \"{}\" and possible machines are \"{}\"", machineName, machines);
         boolean start = true;
-        if (models != null && models.length != 0) {
-            start = Arrays.asList(models).contains(modelFile);
+        if (machines != null && machines.length != 0) {
+            start = Arrays.asList(machines).contains(machineName);
         }
         return start;
     }

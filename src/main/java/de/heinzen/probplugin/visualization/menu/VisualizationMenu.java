@@ -34,7 +34,7 @@ public class VisualizationMenu extends Menu{
     @FXML
     public void initialize() {
         LOGGER.debug("Initializing the visualization-menu!");
-        openVisualizationItem.disableProperty().bind(Bindings.not(plugin.visualizationPossibleProperty()));
+        openVisualizationItem.disableProperty().bind(plugin.currentMachineProperty().isNull());
         stopVisualizationItem.disableProperty().bind(plugin.visualizationProperty().isNull());
     }
 
