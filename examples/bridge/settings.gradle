@@ -1,0 +1,7 @@
+rootProject.name = 'bridge'
+include ':visualization-plugin'
+project(":visualization-plugin").projectDir = file("../visualization-plugin")
+include ':prob2-ui'
+project(":prob2-ui").projectDir = file("../prob2-ui")
+
+

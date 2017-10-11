@@ -1,0 +1,25 @@
+group 'de.heinzen.visualization'
+version '1.0'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven {
+        name "sonatype snapshots"
+        url "https://oss.sonatype.org/content/repositories/snapshots"
+    }
+    maven {
+        name "sonatype release"
+        url "https://oss.sonatype.org/content/repositories/releases"
+    }
+}
+
+dependencies {
+    compileOnly project(':prob2-ui')
+    compileOnly project(':visualization-plugin')
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
