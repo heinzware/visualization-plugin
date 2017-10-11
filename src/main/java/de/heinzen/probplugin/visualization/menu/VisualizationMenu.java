@@ -1,7 +1,6 @@
 package de.heinzen.probplugin.visualization.menu;
 
 import de.heinzen.probplugin.visualization.VisualizationPlugin;
-import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -25,6 +24,9 @@ public class VisualizationMenu extends Menu{
     @FXML
     private MenuItem stopVisualizationItem;
 
+    @FXML
+    private MenuItem detachVisualizationItem;
+
     private final VisualizationPlugin plugin;
 
     public VisualizationMenu(VisualizationPlugin plugin) {
@@ -36,18 +38,25 @@ public class VisualizationMenu extends Menu{
         LOGGER.debug("Initializing the visualization-menu!");
         openVisualizationItem.disableProperty().bind(plugin.currentMachineProperty().isNull());
         stopVisualizationItem.disableProperty().bind(plugin.visualizationProperty().isNull());
+        detachVisualizationItem.disableProperty()
+                .bind(plugin.visualizationProperty().isNull().or(plugin.detachProperty()));
     }
 
     @FXML
-    private void stopVisualization(){
+    private void stopVisualization() {
         LOGGER.debug("Stop menu-item called.");
         plugin.stopVisualization();
     }
 
     @FXML
-    private void openVisualization(){
+    private void openVisualization() {
         LOGGER.debug("Open menu-item called.");
         plugin.openVisualization();
+    }
+
+    @FXML void detachVisualization() {
+        LOGGER.debug("Detach menu-item called.");
+        plugin.detachVisualization();
     }
 
 }

@@ -1,4 +1,5 @@
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -34,7 +35,7 @@ public class LiftVisualization extends Visualization{
     }
 
     @Override
-    protected void initialize(Tab tab) {
+    protected Node initialize() {
 
         // ca 35 Minuten
 
@@ -86,7 +87,7 @@ public class LiftVisualization extends Visualization{
         AnchorPane.setLeftAnchor(root, 0.0);
         pane.getChildren().add(root);
 
-        tab.setContent(pane);
+        return pane;
 
     }
 

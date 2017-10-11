@@ -15,8 +15,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * Description of class
- *
  * @author Christoph Heinzen
  * @version 0.1.0
  * @since 25.09.17
@@ -38,6 +36,12 @@ public class VisualizationModel {
         this.stageManager = stageManager;
     }
 
+    /**
+     * Sets the new and the old trace.
+     *
+     * @param oldTrace Trace before the last executed transition.
+     * @param newTrace Current trace.
+     */
     public void setTraces(Trace oldTrace, Trace newTrace) {
         this.oldTrace = oldTrace;
         this.newTrace = newTrace;
@@ -63,6 +67,11 @@ public class VisualizationModel {
         }
     }
 
+    /**
+     * The methods checks if the value of the given formula was changed through the last transition.
+     * @param formula Formula that could have changed.
+     * @return Returns true if the value has changed.
+     */
     public boolean hasChanged(String formula) {
         LOGGER.debug("Look up if the formula \"{}\" has changed its value.", formula);
         if (oldTrace == null) {
@@ -99,6 +108,13 @@ public class VisualizationModel {
         return !oldValue.getValue().equals(newValue.getValue());
     }
 
+    /**
+     * Gets the expanded and translated value of the given formula.
+     *
+     * @param formula Formula to evaluate.
+     * @return Returns the expanded and translated value of the formula. If the formula can't be evaluated the method
+     *         will return {@code null}.
+     */
     public Object getValue(String formula) {
         LOGGER.debug("Get value for formula \"{}\".", formula);
         if (newStringToResult.containsKey(formula)) {
@@ -116,6 +132,13 @@ public class VisualizationModel {
         return evalCurrent(formula);
     }
 
+    /**
+     * Tries to execute the given event with the given predicates.
+     *
+     * @param event Name of the event
+     * @param predicates Optional predicates of the event
+     * @return Returns a boolean indicating whether the event was executed or not.
+     */
     public boolean executeEvent(String event, String... predicates) {
         Trace currentTrace = this.currentTrace.get();
         LOGGER.debug("Try to execute event \"{}\" with predicates: {}.", event, String.join(" ", predicates));
@@ -155,6 +178,13 @@ public class VisualizationModel {
         }
     }
 
+    /**
+     * Evaluates the given formula, but not on the current state.
+     * It tries to evaluate it on the previous state of the current trace.
+     *
+     * @param formula Formula to evaluate.
+     * @return The value of the formula or {@code null}.
+     */
     public Object getPreviousValue(String formula) {
         LOGGER.debug("Try to get previous value of formula \"{}\".", formula);
         if (newTrace.getPreviousState() != null) {

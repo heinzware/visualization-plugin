@@ -11,14 +11,20 @@ import de.prob2.ui.prob2fx.CurrentProject;
 import de.prob2.ui.prob2fx.CurrentTrace;
 import de.prob2.ui.project.machines.Machine;
 import javafx.beans.property.ReadOnlyObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ro.fortsoft.pf4j.PluginClassLoader;
@@ -56,6 +62,8 @@ public class VisualizationPlugin extends ProBPlugin {
     private HashMap<String, List<FormulaListener>> formulaListenerMap;
     private HashMap<String, EventListener> eventListenerMap;
     private SimpleObjectProperty<Visualization> visualization = new SimpleObjectProperty<>(null);
+    private SimpleBooleanProperty detached = new SimpleBooleanProperty(false);
+    private Stage visualizationStage;
 
     public VisualizationPlugin(PluginWrapper pluginWrapper) {
         super(pluginWrapper);
@@ -70,7 +78,7 @@ public class VisualizationPlugin extends ProBPlugin {
                 if (!newMachine.equals(oldMachine) && visualization.isNotNull().get()) {
                     boolean start = checkMachine(visualization.get().getMachines());
                     if (start) {
-                        visualization.get().initialize(visualizationTab);
+                        setVisualizationContent(visualization.get().initialize());
                     } else {
                         showAlert(Alert.AlertType.INFORMATION,
                                 "The machine \"" + newMachine.getName() + "\" was loaded and " +
@@ -99,7 +107,7 @@ public class VisualizationPlugin extends ProBPlugin {
                     visualizationModel.setTraces(oldTrace, newTrace);
                     if (newTrace.getPreviousState() == null || !newTrace.getPreviousState().isInitialised()) {
                         //the model was initialized in the last event, so constants could have changed
-                        visualization.get().initialize(visualizationTab);
+                        setVisualizationContent(visualization.get().initialize());
                     }
                     updateVisualization();
                 }
@@ -116,13 +124,14 @@ public class VisualizationPlugin extends ProBPlugin {
 
     @Override
     public void startPlugin() {
-        visualizationTab = new Tab(PLUGIN_NAME, createPlaceHolderContent());
+        visualizationTab = new Tab(PLUGIN_NAME, createPlaceHolderContent("No visualization selected"));
         getProBConnection().addTab(visualizationTab);
         visualizationMenu = loadMenu();
         if (visualizationMenu != null) {
             getProBConnection().addMenu(visualizationMenu);
         }
     }
+
 
     @Override
     public void stopPlugin() {
@@ -139,6 +148,8 @@ public class VisualizationPlugin extends ProBPlugin {
     public SimpleObjectProperty<Visualization> visualizationProperty() {
         return visualization;
     }
+
+    public SimpleBooleanProperty detachProperty() {return detached;}
 
     public void openVisualization() {
         if (visualization.isNotNull().get()) {
@@ -198,9 +209,9 @@ public class VisualizationPlugin extends ProBPlugin {
         eventListenerMap.put(listener.getEvent(), listener);
     }
 
-    private Node createPlaceHolderContent() {
+    private Node createPlaceHolderContent(String placeHolder) {
         AnchorPane anchorPane = new AnchorPane();
-        Label noVisualizationLabel = new Label("No visualization selected");
+        Label noVisualizationLabel = new Label(placeHolder);
         AnchorPane.setTopAnchor     (noVisualizationLabel, 10.0);
         AnchorPane.setBottomAnchor  (noVisualizationLabel, 10.0);
         AnchorPane.setLeftAnchor    (noVisualizationLabel, 10.0);
@@ -246,7 +257,7 @@ public class VisualizationPlugin extends ProBPlugin {
         if (currentTrace.getCurrentState() != null && currentTrace.getCurrentState().isInitialised()) {
             LOGGER.debug("Start: The current state is initialised, call initialize() of visualization.");
             visualizationModel.setTraces(null, currentTrace.get());
-            loadedVisualization.initialize(visualizationTab);
+            setVisualizationContent(loadedVisualization.initialize());
             updateVisualization();
         }
         currentTrace.addListener(currentTraceChangeListener);
@@ -265,7 +276,11 @@ public class VisualizationPlugin extends ProBPlugin {
             visualization.get().stop();
             visualizationLoader.closeClassloader();
             visualization.set(null);
-            visualizationTab.setContent(createPlaceHolderContent());
+            if (detached.get()) {
+                visualizationStage.close();
+                detached.set(false);
+            }
+            visualizationTab.setContent(createPlaceHolderContent("No visualization selected"));
             visualizationTab.setText(PLUGIN_NAME);
         }
     }
@@ -322,6 +337,46 @@ public class VisualizationPlugin extends ProBPlugin {
                 LOGGER.info("Last executed event is \"{}\". Call corresponding listener.");
                 eventListenerMap.get(lastEvent).eventExcecuted();
             }
+        }
+    }
+
+    public void detachVisualization() {
+        visualizationStage = new Stage();
+        Node root = visualizationTab.getContent();
+        AnchorPane.setTopAnchor(root, 0.0);
+        AnchorPane.setBottomAnchor(root, 0.0);
+        AnchorPane.setLeftAnchor(root, 0.0);
+        AnchorPane.setRightAnchor(root, 0.0);
+        AnchorPane pane = new AnchorPane(root);
+        Scene visualizationScene = new Scene(pane);
+        visualizationStage.setScene(visualizationScene);
+        visualizationStage.setResizable(true);
+        visualizationStage.setTitle(visualization.get().getName());
+        visualizationStage.setOnCloseRequest(event -> {
+            if (visualization.isNotNull().get()) {
+                Node visualizationContent = ((AnchorPane) visualizationStage.getScene().getRoot()).getChildren().get(0);
+                visualizationTab.setContent(visualizationContent);
+            }
+            detached.set(false);
+            visualizationStage = null;
+        });
+        visualizationStage.show();
+        visualizationTab.setContent(createPlaceHolderContent("Visualization detached"));
+        detached.set(true);
+    }
+
+    private void setVisualizationContent(Node visualizationContent) {
+        if (detached.get()) {
+            Parent parent  = visualizationStage.getScene().getRoot();
+            AnchorPane pane = (parent != null) ? (AnchorPane) parent : new AnchorPane();
+            pane.getChildren().clear();
+            AnchorPane.setTopAnchor(visualizationContent, 0.0);
+            AnchorPane.setBottomAnchor(visualizationContent, 0.0);
+            AnchorPane.setLeftAnchor(visualizationContent, 0.0);
+            AnchorPane.setRightAnchor(visualizationContent, 0.0);
+            pane.getChildren().add(visualizationContent);
+        } else {
+            visualizationTab.setContent(visualizationContent);
         }
     }
 

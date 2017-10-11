@@ -3,6 +3,7 @@ package de.heinzen.probplugin.visualization;
 import de.heinzen.probplugin.visualization.listener.EventListener;
 import de.heinzen.probplugin.visualization.listener.FormulaListener;
 import de.prob.translator.types.BigInteger;
+import javafx.scene.Node;
 import javafx.scene.control.Tab;
 
 /**
@@ -21,7 +22,7 @@ public abstract class Visualization {
 
     protected abstract String[] getMachines();
 
-    protected abstract void initialize(Tab tab);
+    protected abstract Node initialize();
 
     protected abstract void stop();
 

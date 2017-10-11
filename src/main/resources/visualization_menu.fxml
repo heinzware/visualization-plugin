@@ -6,4 +6,5 @@
 <fx:root type="Menu" text="VisualizationFX" xmlns:fx="http://javafx.com/fxml/1">
     <MenuItem fx:id="openVisualizationItem" text="Select Visualization" onAction="#openVisualization"/>
     <MenuItem fx:id="stopVisualizationItem" text="Stop Visualization" onAction="#stopVisualization"/>
+    <MenuItem fx:id="detachVisualizationItem" text="Detach Visualization" onAction="#detachVisualization"/>
 </fx:root>
