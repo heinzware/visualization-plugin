@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.scContextFile org.eventb.core.accurate="true" org.eventb.core.configuration="org.eventb.core.fwd;de.prob.symbolic.ctxBase;de.prob.units.mchBase">
+<org.eventb.core.scAxiom name="'" org.eventb.core.label="axm1" org.eventb.core.predicate="d∈ℕ1∧d=3" org.eventb.core.source="/Bridge/context0.buc|org.eventb.core.contextFile#context0|org.eventb.core.axiom#internal_axm1A" org.eventb.core.theorem="false"/>
+<org.eventb.core.scAxiom name="(" org.eventb.core.label="axm2" org.eventb.core.predicate="LIGHT={green,red}" org.eventb.core.source="/Bridge/context0.buc|org.eventb.core.contextFile#context0|org.eventb.core.axiom#internal_axm2A" org.eventb.core.theorem="false"/>
+<org.eventb.core.scAxiom name=")" org.eventb.core.label="axm3" org.eventb.core.predicate="green≠red" org.eventb.core.source="/Bridge/context0.buc|org.eventb.core.contextFile#context0|org.eventb.core.axiom#internal_axm3A" org.eventb.core.theorem="false"/>
+<org.eventb.core.scCarrierSet name="LIGHT" org.eventb.core.source="/Bridge/context0.buc|org.eventb.core.contextFile#context0|org.eventb.core.carrierSet#internal_set1" org.eventb.core.type="ℙ(LIGHT)"/>
+<org.eventb.core.scConstant name="d" org.eventb.core.source="/Bridge/context0.buc|org.eventb.core.contextFile#context0|org.eventb.core.constant#internal_cst1" org.eventb.core.type="ℤ"/>
+<org.eventb.core.scConstant name="green" org.eventb.core.source="/Bridge/context0.buc|org.eventb.core.contextFile#context0|org.eventb.core.constant#internal_cst2" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.scConstant name="red" org.eventb.core.source="/Bridge/context0.buc|org.eventb.core.contextFile#context0|org.eventb.core.constant#internal_cst3" org.eventb.core.type="LIGHT"/>
+</org.eventb.core.scContextFile>

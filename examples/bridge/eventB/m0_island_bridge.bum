@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.machineFile org.eventb.core.configuration="org.eventb.core.fwd;de.prob.units.mchBase" org.eventb.texttools.text_lastmodified="1416218590783" org.eventb.texttools.text_representation="machine m0_island_bridge sees context0&#10;&#10;variables n&#10;&#10;invariants&#10;  @inv1 n ∈ ℕ&#10;  @inv2 n ≤ d&#10;&#10;events&#10;  event INITIALISATION&#10;    then&#10;      @act1 n ≔ 0&#10;  end&#10;&#10;  event ML_out&#10;    where&#10;      @grd1 n &lt; d&#10;    then&#10;      @act1 n ≔ n + 1&#10;  end&#10;&#10;  event ML_in&#10;    where&#10;      @grd1 n &gt; 0&#10;    then&#10;      @act1 n ≔ n − 1&#10;  end&#10;end&#10;" version="5">
+<org.eventb.core.seesContext name="internal_sees1" org.eventb.core.target="context0"/>
+<org.eventb.core.event name="internal_evt1" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="INITIALISATION">
+<org.eventb.core.action name="internal_act1" org.eventb.core.assignment="n ≔ 0" org.eventb.core.label="act1"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="internal_evt2" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ML_out">
+<org.eventb.core.guard name="internal_grd1" org.eventb.core.label="grd1" org.eventb.core.predicate="n &lt; d"/>
+<org.eventb.core.action name="internal_act1" org.eventb.core.assignment="n ≔ n + 1" org.eventb.core.label="act1"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="internal_evt3" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ML_in">
+<org.eventb.core.guard name="internal_grd1" org.eventb.core.label="grd1" org.eventb.core.predicate="n &gt; 0"/>
+<org.eventb.core.action name="internal_act1" org.eventb.core.assignment="n ≔ n − 1" org.eventb.core.label="act1"/>
+</org.eventb.core.event>
+<org.eventb.core.invariant name="internal_inv1I" org.eventb.core.label="inv1" org.eventb.core.predicate="n ∈ ℕ"/>
+<org.eventb.core.invariant name="internal_inv3I" org.eventb.core.label="inv2" org.eventb.core.predicate="n ≤ d"/>
+<org.eventb.core.variable name="internal_var1" org.eventb.core.identifier="n"/>
+</org.eventb.core.machineFile>

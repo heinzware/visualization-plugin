@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.poFile org.eventb.core.poStamp="3">
+<org.eventb.core.poPredicateSet name="CTXHYP" org.eventb.core.poStamp="0">
+<org.eventb.core.poIdentifier name="LIGHT" org.eventb.core.type="ℙ(LIGHT)"/>
+<org.eventb.core.poIdentifier name="d" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="green" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poIdentifier name="red" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poPredicate name="greeo" org.eventb.core.predicate="d∈ℕ1∧d=3" org.eventb.core.source="/Bridge/context0.buc|org.eventb.core.contextFile#context0|org.eventb.core.axiom#internal_axm1A"/>
+<org.eventb.core.poPredicate name="greep" org.eventb.core.predicate="LIGHT={green,red}" org.eventb.core.source="/Bridge/context0.buc|org.eventb.core.contextFile#context0|org.eventb.core.axiom#internal_axm2A"/>
+<org.eventb.core.poPredicate name="greeq" org.eventb.core.predicate="green≠red" org.eventb.core.source="/Bridge/context0.buc|org.eventb.core.contextFile#context0|org.eventb.core.axiom#internal_axm3A"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="ABSHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poStamp="2">
+<org.eventb.core.poIdentifier name="a" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="b" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="c" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="il_tl" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poIdentifier name="ml_tl" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poIdentifier name="n" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poPredicate name="ml_tm" org.eventb.core.predicate="n∈ℕ" org.eventb.core.source="/Bridge/m0_island_bridge.bum|org.eventb.core.machineFile#m0_island_bridge|org.eventb.core.invariant#internal_inv1I"/>
+<org.eventb.core.poPredicate name="ml_tn" org.eventb.core.predicate="n≤d" org.eventb.core.source="/Bridge/m0_island_bridge.bum|org.eventb.core.machineFile#m0_island_bridge|org.eventb.core.invariant#internal_inv3I"/>
+<org.eventb.core.poPredicate name="ml_to" org.eventb.core.predicate="a∈ℕ" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.invariant#internal_inv1I"/>
+<org.eventb.core.poPredicate name="ml_tp" org.eventb.core.predicate="b∈ℕ" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.invariant#internal_inv2I"/>
+<org.eventb.core.poPredicate name="ml_tq" org.eventb.core.predicate="c∈ℕ" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.invariant#internal_inv3I"/>
+<org.eventb.core.poPredicate name="ml_tr" org.eventb.core.predicate="a+b+c=n" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.invariant#internal_inv4I"/>
+<org.eventb.core.poPredicate name="ml_ts" org.eventb.core.predicate="a=0∨c=0" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.invariant#internal_inv5I"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poSequent name="INITIALISATION/inv5/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  establishment" org.eventb.core.poStamp="3">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTALLHYPcontext="/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="red=green⇒0+0+0&lt;d∧0=0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt1"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#'"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poSelHintSnd="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poSequent#INITIALISATION\/inv5\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD2"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poSequent name="INITIALISATION/inv6/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  establishment" org.eventb.core.poStamp="3">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTALLHYPcontext="/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="red=green⇒0&gt;0∧0=0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAVA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt1"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#'"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAVA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poSelHintSnd="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poSequent#INITIALISATION\/inv6\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD3"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poPredicateSet name="EVTIDENTcontext=" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poStamp="3">
+<org.eventb.core.poIdentifier name="il_tl'" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poIdentifier name="a'" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="ml_tl'" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poIdentifier name="b'" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="c'" org.eventb.core.type="ℤ"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPcontext=" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTIDENTcontext=" org.eventb.core.poStamp="3"/>
+<org.eventb.core.poSequent name="ML_out/inv5/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTALLHYPcontext&gt;"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="ml_tl=green⇒(a+1)+b+c&lt;d∧c=0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt2"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS2AAlA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poSequent#ML_out\/inv5\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD2"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poSequent name="ML_out/inv6/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTALLHYPcontext&gt;"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="il_tl=green⇒b&gt;0∧a+1=0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAVA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt2"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS2AAlA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAVA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poSequent#ML_out\/inv6\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD3"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poSequent name="ML_out/grd1/GRD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Guard strengthening (split)" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTALLHYPcontext&gt;"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="a+b+c&lt;d" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt2|org.eventb.core.guard#internal_grd1"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt2"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt2|org.eventb.core.guard#internal_grd1"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS2AAlA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poSequent#ML_out\/grd1\/GRD|org.eventb.core.poPredicateSet#SEQHYP"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poSequent name="ML_out/grd2/GRD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Guard strengthening (split)" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTALLHYPcontext&gt;"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="c=0" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt2|org.eventb.core.guard#internal_grd2"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt2"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt2|org.eventb.core.guard#internal_grd2"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS2AAlA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poSequent#ML_out\/grd2\/GRD|org.eventb.core.poPredicateSet#SEQHYP"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poPredicateSet name="EVTIDENTcontext&gt;" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="2">
+<org.eventb.core.poIdentifier name="a'" org.eventb.core.type="ℤ"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPcontext&gt;" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTIDENTcontext&gt;" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="ml_tl=green" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS2AAlA3EeOH8cnegPmrEg|org.eventb.core.guard#_RS2nEVA3EeOH8cnegPmrEg"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poSequent name="ML_in/inv5/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTALLHYPcontext?"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="ml_tl=green⇒a+b+(c − 1)&lt;d∧c − 1=0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt3"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS3OIFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poSequent#ML_in\/inv5\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD2"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poPredicateSet name="EVTIDENTcontext?" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="2">
+<org.eventb.core.poIdentifier name="c'" org.eventb.core.type="ℤ"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPcontext?" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTIDENTcontext?" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="c&gt;0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS3OIFA3EeOH8cnegPmrEg|org.eventb.core.guard#_RS3OIlA3EeOH8cnegPmrEg"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poSequent name="IL_in/inv5/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="3">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTALLHYPcontext@"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="ml_tl=green⇒a − 1+(b+1)+c&lt;d∧c=0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt4"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS31MFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poSequent#IL_in\/inv5\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD2"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poSequent name="IL_in/inv6/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="3">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTALLHYPcontext@"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="il_tl=green⇒b+1&gt;0∧a − 1=0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAVA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt4"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS31MFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAVA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poSequent#IL_in\/inv6\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD3"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poPredicateSet name="EVTIDENTcontext@" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="3">
+<org.eventb.core.poIdentifier name="a'" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="b'" org.eventb.core.type="ℤ"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPcontext@" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTIDENTcontext@" org.eventb.core.poStamp="3">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="a&gt;0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS31MFA3EeOH8cnegPmrEg|org.eventb.core.guard#_RS31MlA3EeOH8cnegPmrEg"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poSequent name="IL_out/inv5/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTALLHYPcontextA"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="ml_tl=green⇒a+(b − 1)+(c+1)&lt;d∧c+1=0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt5"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS4cQFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poSequent#IL_out\/inv5\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD2"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poSequent name="IL_out/inv6/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTALLHYPcontextA"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="il_tl=green⇒b − 1&gt;0∧a=0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAVA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt5"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS4cQFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAVA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poSequent#IL_out\/inv6\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD3"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poSequent name="IL_out/grd1/GRD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Guard strengthening (split)" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTALLHYPcontextA"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="b&gt;0" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt5|org.eventb.core.guard#internal_grd1"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt5"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt5|org.eventb.core.guard#internal_grd1"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS4cQFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poSequent#IL_out\/grd1\/GRD|org.eventb.core.poPredicateSet#SEQHYP"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poSequent name="IL_out/grd2/GRD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Guard strengthening (split)" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTALLHYPcontextA"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="a=0" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt5|org.eventb.core.guard#internal_grd2"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt5"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.event#internal_evt5|org.eventb.core.guard#internal_grd2"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS4cQFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poSequent#IL_out\/grd2\/GRD|org.eventb.core.poPredicateSet#SEQHYP"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poPredicateSet name="EVTIDENTcontextA" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="2">
+<org.eventb.core.poIdentifier name="b'" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="c'" org.eventb.core.type="ℤ"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPcontextA" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTIDENTcontextA" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="il_tl=green" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS4cQFA3EeOH8cnegPmrEg|org.eventb.core.guard#_RS4cQlA3EeOH8cnegPmrEg"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poSequent name="ML_tl_green/inv5/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTALLHYPcontextB"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="green=green⇒a+b+c&lt;d∧c=0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS5DUlA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSelHint name="SEQHYT" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poSequent#ML_tl_green\/inv5\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD2"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poSequent name="ML_tl_green/inv6/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTALLHYPcontextB"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="red=green⇒b&gt;0∧a=0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAVA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS5DUlA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAVA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSelHint name="SEQHYT" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poSequent#ML_tl_green\/inv6\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD3"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poPredicateSet name="EVTIDENTcontextB" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="2">
+<org.eventb.core.poIdentifier name="il_tl'" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poIdentifier name="ml_tl'" org.eventb.core.type="LIGHT"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPcontextB" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTIDENTcontextB" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="ml_tl=red" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS5DUlA3EeOH8cnegPmrEg|org.eventb.core.guard#_RS5DU1A3EeOH8cnegPmrEg"/>
+<org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="a+b&lt;d" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS5DUlA3EeOH8cnegPmrEg|org.eventb.core.guard#_RS5qYFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poPredicate name="PRD2" org.eventb.core.predicate="c=0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS5DUlA3EeOH8cnegPmrEg|org.eventb.core.guard#_RS5qYVA3EeOH8cnegPmrEg"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poSequent name="IL_tl_green/inv5/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTALLHYPcontextC"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="red=green⇒a+b+c&lt;d∧c=0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS6RcVA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSelHint name="SEQHYT" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poSequent#IL_tl_green\/inv5\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD2"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poSequent name="IL_tl_green/inv6/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTALLHYPcontextC"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="green=green⇒b&gt;0∧a=0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAVA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS6RcVA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAVA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poSelHint name="SEQHYT" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poSequent#IL_tl_green\/inv6\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD3"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poPredicateSet name="EVTIDENTcontextC" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="2">
+<org.eventb.core.poIdentifier name="il_tl'" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poIdentifier name="ml_tl'" org.eventb.core.type="LIGHT"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPcontextC" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#EVTIDENTcontextC" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="il_tl=red" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS6RcVA3EeOH8cnegPmrEg|org.eventb.core.guard#_RS6RclA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="a=0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS6RcVA3EeOH8cnegPmrEg|org.eventb.core.guard#_RS6Rc1A3EeOH8cnegPmrEg"/>
+<org.eventb.core.poPredicate name="PRD2" org.eventb.core.predicate="b&gt;0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.event#_RS6RcVA3EeOH8cnegPmrEg|org.eventb.core.guard#_RS64gFA3EeOH8cnegPmrEg"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="ALLHYP" org.eventb.core.parentSet="/Bridge/m2_lights_wrong.bpo|org.eventb.core.poFile#m2_lights_wrong|org.eventb.core.poPredicateSet#ABSHYP" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="ml_tl∈LIGHT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS0x5VA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="il_tl∈LIGHT" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS1Y8FA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poPredicate name="PRD2" org.eventb.core.predicate="ml_tl=green⇒a+b+c&lt;d∧c=0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAFA3EeOH8cnegPmrEg"/>
+<org.eventb.core.poPredicate name="PRD3" org.eventb.core.predicate="il_tl=green⇒b&gt;0∧a=0" org.eventb.core.source="/Bridge/m2_lights_wrong.bum|org.eventb.core.machineFile#m2_lights_wrong|org.eventb.core.invariant#_RS2AAVA3EeOH8cnegPmrEg"/>
+</org.eventb.core.poPredicateSet>
+</org.eventb.core.poFile>

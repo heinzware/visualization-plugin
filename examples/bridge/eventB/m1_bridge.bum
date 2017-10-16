@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.machineFile org.eventb.core.configuration="org.eventb.core.fwd;de.prob.units.mchBase" org.eventb.texttools.text_lastmodified="1416233907388" org.eventb.texttools.text_representation="machine m1_bridge refines m0_island_bridge  sees context0&#10;&#10;variables a // Number of cars entering the island&#10;          b // Number of cars in the island&#10;          c // Number of cars leaving the island&#10;&#10;&#10;invariants&#10;  @inv1 a ∈ ℕ&#10;  @inv2 b ∈ ℕ&#10;  @inv3 c ∈ ℕ&#10;  @inv4 a + b + c = n&#10;  @inv5 a = 0 ∨ c = 0&#10;&#10;variant 2∗a+b&#10;&#10;events&#10;  event INITIALISATION&#10;    then&#10;      @act1 a, b, c ≔ 0, 0, 0&#10;  end&#10;  event ML_out refines ML_out&#10;    where&#10;      @grd1 a + b + c &lt; d&#10;      @grd2 c = 0&#10;    then&#10;      @act1 a ≔ a + 1&#10;  end&#10;&#10;  event ML_in refines ML_in&#10;    where&#10;      @grd1 c &gt; 0&#10;    then&#10;      @act1 c ≔ c − 1&#10;  end&#10;&#10;  convergent event IL_in&#10;    where&#10;      @grd1 a &gt; 0&#10;    then&#10;      @act1 a ≔ a − 1&#10;      @act2 b ≔ b + 1&#10;  end&#10;&#10;  convergent event IL_out&#10;    where&#10;      @grd1 b &gt; 0&#10;      @grd2 a = 0&#10;    then&#10;      @act1 b ≔ b − 1&#10;      @act2 c ≔ c + 1&#10;  end&#10;end&#10;" version="5">
+<org.eventb.core.refinesMachine name="internal_refines1" org.eventb.core.target="m0_island_bridge"/>
+<org.eventb.core.seesContext name="internal_sees1" org.eventb.core.target="context0"/>
+<org.eventb.core.event name="internal_evt1" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="INITIALISATION">
+<org.eventb.core.action name="internal_act1" org.eventb.core.assignment="a, b, c ≔ 0, 0, 0" org.eventb.core.label="act1"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="internal_evt2" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ML_out">
+<org.eventb.core.refinesEvent name="internal_refines1" org.eventb.core.target="ML_out"/>
+<org.eventb.core.guard name="internal_grd1" org.eventb.core.label="grd1" org.eventb.core.predicate="a + b + c &lt; d"/>
+<org.eventb.core.guard name="internal_grd2" org.eventb.core.label="grd2" org.eventb.core.predicate="c = 0"/>
+<org.eventb.core.action name="internal_act1" org.eventb.core.assignment="a ≔ a + 1" org.eventb.core.label="act1"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="internal_evt3" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ML_in">
+<org.eventb.core.refinesEvent name="internal_refines1" org.eventb.core.target="ML_in"/>
+<org.eventb.core.guard name="internal_grd1" org.eventb.core.label="grd1" org.eventb.core.predicate="c &gt; 0"/>
+<org.eventb.core.action name="internal_act1" org.eventb.core.assignment="c ≔ c − 1" org.eventb.core.label="act1"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="internal_evt4" org.eventb.core.convergence="1" org.eventb.core.extended="false" org.eventb.core.label="IL_in">
+<org.eventb.core.guard name="internal_grd1" org.eventb.core.label="grd1" org.eventb.core.predicate="a &gt; 0"/>
+<org.eventb.core.action name="internal_act1" org.eventb.core.assignment="a ≔ a − 1" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="_QsLTsFBaEeOH8cnegPmrEg" org.eventb.core.assignment="b ≔ b + 1" org.eventb.core.label="act2"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="internal_evt5" org.eventb.core.convergence="1" org.eventb.core.extended="false" org.eventb.core.label="IL_out">
+<org.eventb.core.guard name="internal_grd1" org.eventb.core.label="grd1" org.eventb.core.predicate="b &gt; 0"/>
+<org.eventb.core.guard name="internal_grd2" org.eventb.core.label="grd2" org.eventb.core.predicate="a = 0"/>
+<org.eventb.core.action name="internal_act1" org.eventb.core.assignment="b ≔ b − 1" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="internal_act3" org.eventb.core.assignment="c ≔ c + 1" org.eventb.core.label="act2"/>
+</org.eventb.core.event>
+<org.eventb.core.invariant name="internal_inv1I" org.eventb.core.label="inv1" org.eventb.core.predicate="a ∈ ℕ"/>
+<org.eventb.core.invariant name="internal_inv2I" org.eventb.core.label="inv2" org.eventb.core.predicate="b ∈ ℕ"/>
+<org.eventb.core.invariant name="internal_inv3I" org.eventb.core.label="inv3" org.eventb.core.predicate="c ∈ ℕ"/>
+<org.eventb.core.invariant name="internal_inv4I" org.eventb.core.label="inv4" org.eventb.core.predicate="a + b + c = n"/>
+<org.eventb.core.invariant name="internal_inv5I" org.eventb.core.label="inv5" org.eventb.core.predicate="a = 0 ∨ c = 0"/>
+<org.eventb.core.variable name="internal_var1" org.eventb.core.comment="Number of cars entering the island" org.eventb.core.identifier="a"/>
+<org.eventb.core.variable name="internal_var2" org.eventb.core.comment="Number of cars in the island" org.eventb.core.identifier="b"/>
+<org.eventb.core.variable name="internal_var3" org.eventb.core.comment="Number of cars leaving the island" org.eventb.core.identifier="c"/>
+<org.eventb.core.variant name="internal_refines2" org.eventb.core.expression="2∗a+b" org.eventb.emf.persistence.emf_id="_mTJoQG5kEeSAjYYe0tXVdw"/>
+</org.eventb.core.machineFile>

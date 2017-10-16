@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.machineFile org.eventb.core.configuration="org.eventb.core.fwd;de.prob.units.mchBase" org.eventb.texttools.text_lastmodified="1416827580960" org.eventb.texttools.text_representation="machine m3_sensors_orig refines m2_lights  sees context0&#10;&#10;variables a b c ml_tl il_tl ml_pass il_pass ml_out_sr il_out_sr ml_in_sr il_in_sr&#10;&#10;invariants&#10;  @inv1 ml_out_sr ∈ BOOL&#10;  @inv2 il_out_sr ∈ BOOL&#10;  @inv3 ml_in_sr ∈ BOOL&#10;  @inv4 il_in_sr ∈ BOOL&#10;  @inv5 il_in_sr = TRUE ⇒ a &gt; 0&#10;  theorem @thm5 il_in_sr = TRUE ⇒ c=0&#10;  @inv6 il_out_sr = TRUE ⇒ b &gt; 0&#10;  @inv7 ml_in_sr = TRUE ⇒ c &gt; 0&#10;&#10;events&#10;  event INITIALISATION&#10;    then&#10;      @act1 a, b, c ≔ 0, 0, 0&#10;      @act2 ml_tl ≔ red&#10;      @act3 il_tl ≔ red&#10;      @act4 ml_pass ≔ TRUE&#10;      @act5 il_pass ≔ TRUE&#10;      @act6 ml_out_sr ≔ FALSE&#10;      @act7 il_out_sr ≔ FALSE&#10;      @act8 ml_in_sr ≔ FALSE&#10;      @act9 il_in_sr ≔ FALSE&#10;  end&#10;&#10;  event ML_out refines ML_out&#10;    where&#10;      @grd1 ml_tl = green&#10;      @grd2 a + b + 1 ≠ d&#10;      @grd3 ml_out_sr = TRUE&#10;    then&#10;      @act1 a ≔ a + 1&#10;      @act2 ml_pass ≔ TRUE&#10;      @act3 ml_out_sr ≔ FALSE&#10;  end&#10;&#10;  event ML_out_last refines ML_out_last&#10;    where&#10;      @grd1 ml_tl = green&#10;      @grd2 a + b + 1 = d&#10;      @grd3 ml_out_sr = TRUE&#10;    then&#10;      @act1 a ≔ a + 1&#10;      @act2 ml_pass ≔ TRUE&#10;      @act3 ml_tl ≔ red&#10;      @act4 ml_out_sr ≔ FALSE&#10;  end&#10;&#10;  event ML_in refines ML_in&#10;    where&#10;      @grd1 ml_in_sr = TRUE&#10;    then&#10;      @act1 c ≔ c − 1&#10;      @act2 ml_in_sr ≔ FALSE&#10;  end&#10;&#10;  event IL_in refines IL_in&#10;    where&#10;      @grd1 il_in_sr = TRUE&#10;    then&#10;      @act1 a ≔ a − 1&#10;      @act2 b ≔ b + 1&#10;      @act3 il_in_sr ≔ FALSE&#10;  end&#10;&#10;  event IL_out refines IL_out&#10;    where&#10;      @grd1 il_tl = green&#10;      @grd2 b ≠ 1&#10;      @grd3 il_out_sr = TRUE&#10;    then&#10;      @act1 b ≔ b − 1&#10;      @act2 c ≔ c + 1&#10;      @act3 il_pass ≔ TRUE&#10;      @act4 il_out_sr ≔ FALSE&#10;  end&#10;&#10;  event IL_out_last refines IL_out_last&#10;    where&#10;      @grd1 il_tl = green&#10;      @grd2 b = 1&#10;      @grd3 il_out_sr = TRUE&#10;    then&#10;      @act1 b ≔ b − 1&#10;      @act2 c ≔ c + 1&#10;      @act3 il_pass ≔ TRUE&#10;      @act4 il_tl ≔ red&#10;      @act5 il_out_sr ≔ FALSE&#10;  end&#10;&#10;  event ML_tl_green refines ML_tl_green&#10;    where&#10;      @grd1 ml_tl = red&#10;      @grd2 a + b + c &lt; d&#10;      @grd3 c = 0&#10;      @grd4 il_pass = TRUE&#10;      @grd5 ml_out_sr = TRUE&#10;    then&#10;      @act1 ml_tl ≔ green&#10;      @act2 il_tl ≔ red&#10;      @act3 ml_pass ≔ FALSE&#10;  end&#10;&#10;  event IL_tl_green refines IL_tl_green&#10;    where&#10;      @grd1 il_tl = red&#10;      @grd2 a = 0&#10;      @grd3 ml_pass = TRUE&#10;      @grd4 b &gt; 0&#10;      @grd5 il_out_sr = TRUE&#10;    then&#10;      @act1 il_tl ≔ green&#10;      @act2 ml_tl ≔ red&#10;      @act3 il_pass ≔ FALSE&#10;  end&#10;&#10;  event ML_out_arr&#10;    where&#10;      @grd1 ml_out_sr = FALSE&#10;    then&#10;      @act1 ml_out_sr ≔ TRUE&#10;  end&#10;&#10;  event IL_out_arr&#10;    where&#10;      @grd1 il_out_sr = FALSE&#10;      @grd2 b &gt; 0&#10;    then&#10;      @act1 il_out_sr ≔ TRUE&#10;  end&#10;&#10;  event ML_in_arr&#10;    where&#10;      @grd1 ml_in_sr = FALSE&#10;      @grd2 c &gt; 0&#10;    then&#10;      @act1 ml_in_sr ≔ TRUE&#10;  end&#10;&#10;  event IL_in_arr&#10;    where&#10;      @grd1 il_in_sr = FALSE&#10;      @grd2 a &gt; 0&#10;    then&#10;      @act1 il_in_sr ≔ TRUE&#10;  end&#10;end&#10;" version="5">
+<org.eventb.core.refinesMachine name="_2l55EXPKEeSdd99JEnI-rQ" org.eventb.core.target="m2_lights"/>
+<org.eventb.core.seesContext name="_2l6gIHPKEeSdd99JEnI-rQ" org.eventb.core.target="context0"/>
+<org.eventb.core.event name="'" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="INITIALISATION">
+<org.eventb.core.action name="_2l7HMHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="a, b, c ≔ 0, 0, 0" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="_2l7uQHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="ml_tl ≔ red" org.eventb.core.label="act2"/>
+<org.eventb.core.action name="_2l7uQXPKEeSdd99JEnI-rQ" org.eventb.core.assignment="il_tl ≔ red" org.eventb.core.label="act3"/>
+<org.eventb.core.action name="_2l7uQnPKEeSdd99JEnI-rQ" org.eventb.core.assignment="ml_pass ≔ TRUE" org.eventb.core.label="act4"/>
+<org.eventb.core.action name="_2l8VUHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="il_pass ≔ TRUE" org.eventb.core.label="act5"/>
+<org.eventb.core.action name="_2l8VUXPKEeSdd99JEnI-rQ" org.eventb.core.assignment="ml_out_sr ≔ FALSE" org.eventb.core.label="act6"/>
+<org.eventb.core.action name="_2l88YHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="il_out_sr ≔ FALSE" org.eventb.core.label="act7"/>
+<org.eventb.core.action name="_2l88YXPKEeSdd99JEnI-rQ" org.eventb.core.assignment="ml_in_sr ≔ FALSE" org.eventb.core.label="act8"/>
+<org.eventb.core.action name="_2l88YnPKEeSdd99JEnI-rQ" org.eventb.core.assignment="il_in_sr ≔ FALSE" org.eventb.core.label="act9"/>
+</org.eventb.core.event>
+<org.eventb.core.variable name="_2l9jcHPKEeSdd99JEnI-rQ" org.eventb.core.identifier="a"/>
+<org.eventb.core.variable name="_2l9jcXPKEeSdd99JEnI-rQ" org.eventb.core.identifier="b"/>
+<org.eventb.core.variable name="_2l-KgHPKEeSdd99JEnI-rQ" org.eventb.core.identifier="c"/>
+<org.eventb.core.variable name="_2l-KgXPKEeSdd99JEnI-rQ" org.eventb.core.identifier="ml_tl"/>
+<org.eventb.core.variable name="_2l-KgnPKEeSdd99JEnI-rQ" org.eventb.core.identifier="il_tl"/>
+<org.eventb.core.variable name="_2l-Kg3PKEeSdd99JEnI-rQ" org.eventb.core.identifier="ml_pass"/>
+<org.eventb.core.variable name="_2l-xkHPKEeSdd99JEnI-rQ" org.eventb.core.identifier="il_pass"/>
+<org.eventb.core.variable name="_2l-xkXPKEeSdd99JEnI-rQ" org.eventb.core.identifier="ml_out_sr"/>
+<org.eventb.core.variable name="_2l-xknPKEeSdd99JEnI-rQ" org.eventb.core.identifier="il_out_sr"/>
+<org.eventb.core.variable name="_2l_YoHPKEeSdd99JEnI-rQ" org.eventb.core.identifier="ml_in_sr"/>
+<org.eventb.core.variable name="_2l_YoXPKEeSdd99JEnI-rQ" org.eventb.core.identifier="il_in_sr"/>
+<org.eventb.core.invariant name="_2l_YonPKEeSdd99JEnI-rQ" org.eventb.core.label="inv1" org.eventb.core.predicate="ml_out_sr ∈ BOOL"/>
+<org.eventb.core.invariant name="_2mBN0HPKEeSdd99JEnI-rQ" org.eventb.core.label="inv2" org.eventb.core.predicate="il_out_sr ∈ BOOL"/>
+<org.eventb.core.invariant name="_2mBN0XPKEeSdd99JEnI-rQ" org.eventb.core.label="inv3" org.eventb.core.predicate="ml_in_sr ∈ BOOL"/>
+<org.eventb.core.invariant name="_2mB04HPKEeSdd99JEnI-rQ" org.eventb.core.label="inv4" org.eventb.core.predicate="il_in_sr ∈ BOOL"/>
+<org.eventb.core.invariant name="_2mB04XPKEeSdd99JEnI-rQ" org.eventb.core.label="inv5" org.eventb.core.predicate="il_in_sr = TRUE ⇒ a &gt; 0"/>
+<org.eventb.core.invariant name="_2mCb8HPKEeSdd99JEnI-rQ" org.eventb.core.label="thm5" org.eventb.core.predicate="il_in_sr = TRUE ⇒ c=0" org.eventb.core.theorem="true"/>
+<org.eventb.core.invariant name="_2mCb8XPKEeSdd99JEnI-rQ" org.eventb.core.label="inv6" org.eventb.core.predicate="il_out_sr = TRUE ⇒ b &gt; 0"/>
+<org.eventb.core.invariant name="_2mDDAHPKEeSdd99JEnI-rQ" org.eventb.core.label="inv7" org.eventb.core.predicate="ml_in_sr = TRUE ⇒ c &gt; 0"/>
+<org.eventb.core.event name="_2mDqEHPKEeSdd99JEnI-rQ" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ML_out">
+<org.eventb.core.refinesEvent name="_2mDqEXPKEeSdd99JEnI-rQ" org.eventb.core.target="ML_out"/>
+<org.eventb.core.guard name="_2mERIHPKEeSdd99JEnI-rQ" org.eventb.core.label="grd1" org.eventb.core.predicate="ml_tl = green"/>
+<org.eventb.core.guard name="_2mERIXPKEeSdd99JEnI-rQ" org.eventb.core.label="grd2" org.eventb.core.predicate="a + b + 1 ≠ d"/>
+<org.eventb.core.guard name="_2mERInPKEeSdd99JEnI-rQ" org.eventb.core.label="grd3" org.eventb.core.predicate="ml_out_sr = TRUE"/>
+<org.eventb.core.action name="_2mE4MHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="a ≔ a + 1" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="_2mE4MXPKEeSdd99JEnI-rQ" org.eventb.core.assignment="ml_pass ≔ TRUE" org.eventb.core.label="act2"/>
+<org.eventb.core.action name="_2mE4MnPKEeSdd99JEnI-rQ" org.eventb.core.assignment="ml_out_sr ≔ FALSE" org.eventb.core.label="act3"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_2mFfQHPKEeSdd99JEnI-rQ" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ML_out_last">
+<org.eventb.core.refinesEvent name="_2mFfQXPKEeSdd99JEnI-rQ" org.eventb.core.target="ML_out_last"/>
+<org.eventb.core.guard name="_2mGGUHPKEeSdd99JEnI-rQ" org.eventb.core.label="grd1" org.eventb.core.predicate="ml_tl = green"/>
+<org.eventb.core.guard name="_2mGGUXPKEeSdd99JEnI-rQ" org.eventb.core.label="grd2" org.eventb.core.predicate="a + b + 1 = d"/>
+<org.eventb.core.guard name="_2mGGUnPKEeSdd99JEnI-rQ" org.eventb.core.label="grd3" org.eventb.core.predicate="ml_out_sr = TRUE"/>
+<org.eventb.core.action name="_2mGtYHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="a ≔ a + 1" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="_2mGtYXPKEeSdd99JEnI-rQ" org.eventb.core.assignment="ml_pass ≔ TRUE" org.eventb.core.label="act2"/>
+<org.eventb.core.action name="_2mGtYnPKEeSdd99JEnI-rQ" org.eventb.core.assignment="ml_tl ≔ red" org.eventb.core.label="act3"/>
+<org.eventb.core.action name="_2mHUcHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="ml_out_sr ≔ FALSE" org.eventb.core.label="act4"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_2mHUcXPKEeSdd99JEnI-rQ" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ML_in">
+<org.eventb.core.refinesEvent name="_2mH7gHPKEeSdd99JEnI-rQ" org.eventb.core.target="ML_in"/>
+<org.eventb.core.guard name="_2mH7gXPKEeSdd99JEnI-rQ" org.eventb.core.label="grd1" org.eventb.core.predicate="ml_in_sr = TRUE"/>
+<org.eventb.core.action name="_2mH7gnPKEeSdd99JEnI-rQ" org.eventb.core.assignment="c ≔ c − 1" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="_2mIikHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="ml_in_sr ≔ FALSE" org.eventb.core.label="act2"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_2mIikXPKEeSdd99JEnI-rQ" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="IL_in">
+<org.eventb.core.refinesEvent name="_2mIiknPKEeSdd99JEnI-rQ" org.eventb.core.target="IL_in"/>
+<org.eventb.core.guard name="_2mJJoHPKEeSdd99JEnI-rQ" org.eventb.core.label="grd1" org.eventb.core.predicate="il_in_sr = TRUE"/>
+<org.eventb.core.action name="_2mJJoXPKEeSdd99JEnI-rQ" org.eventb.core.assignment="a ≔ a − 1" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="_2mJJonPKEeSdd99JEnI-rQ" org.eventb.core.assignment="b ≔ b + 1" org.eventb.core.label="act2"/>
+<org.eventb.core.action name="_2mJwsHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="il_in_sr ≔ FALSE" org.eventb.core.label="act3"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_2mJwsXPKEeSdd99JEnI-rQ" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="IL_out">
+<org.eventb.core.refinesEvent name="_2mKXwHPKEeSdd99JEnI-rQ" org.eventb.core.target="IL_out"/>
+<org.eventb.core.guard name="_2mKXwXPKEeSdd99JEnI-rQ" org.eventb.core.label="grd1" org.eventb.core.predicate="il_tl = green"/>
+<org.eventb.core.guard name="_2mKXwnPKEeSdd99JEnI-rQ" org.eventb.core.label="grd2" org.eventb.core.predicate="b ≠ 1"/>
+<org.eventb.core.guard name="_2mK-0HPKEeSdd99JEnI-rQ" org.eventb.core.label="grd3" org.eventb.core.predicate="il_out_sr = TRUE"/>
+<org.eventb.core.action name="_2mK-0XPKEeSdd99JEnI-rQ" org.eventb.core.assignment="b ≔ b − 1" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="_2mK-0nPKEeSdd99JEnI-rQ" org.eventb.core.assignment="c ≔ c + 1" org.eventb.core.label="act2"/>
+<org.eventb.core.action name="_2mLl4HPKEeSdd99JEnI-rQ" org.eventb.core.assignment="il_pass ≔ TRUE" org.eventb.core.label="act3"/>
+<org.eventb.core.action name="_2mLl4XPKEeSdd99JEnI-rQ" org.eventb.core.assignment="il_out_sr ≔ FALSE" org.eventb.core.label="act4"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_2mLl4nPKEeSdd99JEnI-rQ" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="IL_out_last">
+<org.eventb.core.refinesEvent name="_2mMM8HPKEeSdd99JEnI-rQ" org.eventb.core.target="IL_out_last"/>
+<org.eventb.core.guard name="_2mMM8XPKEeSdd99JEnI-rQ" org.eventb.core.label="grd1" org.eventb.core.predicate="il_tl = green"/>
+<org.eventb.core.guard name="_2mM0AHPKEeSdd99JEnI-rQ" org.eventb.core.label="grd2" org.eventb.core.predicate="b = 1"/>
+<org.eventb.core.guard name="_2mNbEHPKEeSdd99JEnI-rQ" org.eventb.core.label="grd3" org.eventb.core.predicate="il_out_sr = TRUE"/>
+<org.eventb.core.action name="_2mOCIHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="b ≔ b − 1" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="_2mOpMHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="c ≔ c + 1" org.eventb.core.label="act2"/>
+<org.eventb.core.action name="_2mPQQHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="il_pass ≔ TRUE" org.eventb.core.label="act3"/>
+<org.eventb.core.action name="_2mP3UHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="il_tl ≔ red" org.eventb.core.label="act4"/>
+<org.eventb.core.action name="_2mQeYHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="il_out_sr ≔ FALSE" org.eventb.core.label="act5"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_2mRFcHPKEeSdd99JEnI-rQ" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ML_tl_green">
+<org.eventb.core.refinesEvent name="_2mRsgHPKEeSdd99JEnI-rQ" org.eventb.core.target="ML_tl_green"/>
+<org.eventb.core.guard name="_2mRsgXPKEeSdd99JEnI-rQ" org.eventb.core.label="grd1" org.eventb.core.predicate="ml_tl = red"/>
+<org.eventb.core.guard name="_2mSTkHPKEeSdd99JEnI-rQ" org.eventb.core.label="grd2" org.eventb.core.predicate="a + b + c &lt; d"/>
+<org.eventb.core.guard name="_2mS6oHPKEeSdd99JEnI-rQ" org.eventb.core.label="grd3" org.eventb.core.predicate="c = 0"/>
+<org.eventb.core.guard name="_2mThsHPKEeSdd99JEnI-rQ" org.eventb.core.label="grd4" org.eventb.core.predicate="il_pass = TRUE"/>
+<org.eventb.core.guard name="_2mThsXPKEeSdd99JEnI-rQ" org.eventb.core.label="grd5" org.eventb.core.predicate="ml_out_sr = TRUE"/>
+<org.eventb.core.action name="_2mUIwHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="ml_tl ≔ green" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="_2mUIwXPKEeSdd99JEnI-rQ" org.eventb.core.assignment="il_tl ≔ red" org.eventb.core.label="act2"/>
+<org.eventb.core.action name="_2mUIwnPKEeSdd99JEnI-rQ" org.eventb.core.assignment="ml_pass ≔ FALSE" org.eventb.core.label="act3"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_2mUv0HPKEeSdd99JEnI-rQ" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="IL_tl_green">
+<org.eventb.core.refinesEvent name="_2mVW4HPKEeSdd99JEnI-rQ" org.eventb.core.target="IL_tl_green"/>
+<org.eventb.core.guard name="_2mVW4XPKEeSdd99JEnI-rQ" org.eventb.core.label="grd1" org.eventb.core.predicate="il_tl = red"/>
+<org.eventb.core.guard name="_2mVW4nPKEeSdd99JEnI-rQ" org.eventb.core.label="grd2" org.eventb.core.predicate="a = 0"/>
+<org.eventb.core.guard name="_2mV98HPKEeSdd99JEnI-rQ" org.eventb.core.label="grd3" org.eventb.core.predicate="ml_pass = TRUE"/>
+<org.eventb.core.guard name="_2mV98XPKEeSdd99JEnI-rQ" org.eventb.core.label="grd4" org.eventb.core.predicate="b &gt; 0"/>
+<org.eventb.core.guard name="_2mV98nPKEeSdd99JEnI-rQ" org.eventb.core.label="grd5" org.eventb.core.predicate="il_out_sr = TRUE"/>
+<org.eventb.core.action name="_2mWlAHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="il_tl ≔ green" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="_2mWlAXPKEeSdd99JEnI-rQ" org.eventb.core.assignment="ml_tl ≔ red" org.eventb.core.label="act2"/>
+<org.eventb.core.action name="_2mXMEHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="il_pass ≔ FALSE" org.eventb.core.label="act3"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_2mXMEXPKEeSdd99JEnI-rQ" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ML_out_arr">
+<org.eventb.core.guard name="_2mXzIHPKEeSdd99JEnI-rQ" org.eventb.core.label="grd1" org.eventb.core.predicate="ml_out_sr = FALSE"/>
+<org.eventb.core.action name="_2mXzIXPKEeSdd99JEnI-rQ" org.eventb.core.assignment="ml_out_sr ≔ TRUE" org.eventb.core.label="act1"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_2mXzInPKEeSdd99JEnI-rQ" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="IL_out_arr">
+<org.eventb.core.guard name="_2mYaMHPKEeSdd99JEnI-rQ" org.eventb.core.label="grd1" org.eventb.core.predicate="il_out_sr = FALSE"/>
+<org.eventb.core.guard name="_2mYaMXPKEeSdd99JEnI-rQ" org.eventb.core.label="grd2" org.eventb.core.predicate="b &gt; 0"/>
+<org.eventb.core.action name="_2mZBQHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="il_out_sr ≔ TRUE" org.eventb.core.label="act1"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_2mZBQXPKEeSdd99JEnI-rQ" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ML_in_arr">
+<org.eventb.core.guard name="_2mZoUHPKEeSdd99JEnI-rQ" org.eventb.core.label="grd1" org.eventb.core.predicate="ml_in_sr = FALSE"/>
+<org.eventb.core.guard name="_2mZoUXPKEeSdd99JEnI-rQ" org.eventb.core.label="grd2" org.eventb.core.predicate="c &gt; 0"/>
+<org.eventb.core.action name="_2maPYHPKEeSdd99JEnI-rQ" org.eventb.core.assignment="ml_in_sr ≔ TRUE" org.eventb.core.label="act1"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="_2maPYXPKEeSdd99JEnI-rQ" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="IL_in_arr">
+<org.eventb.core.guard name="_2ma2cHPKEeSdd99JEnI-rQ" org.eventb.core.label="grd1" org.eventb.core.predicate="il_in_sr = FALSE"/>
+<org.eventb.core.guard name="_2ma2cXPKEeSdd99JEnI-rQ" org.eventb.core.label="grd2" org.eventb.core.predicate="a &gt; 0"/>
+<org.eventb.core.action name="_2ma2cnPKEeSdd99JEnI-rQ" org.eventb.core.assignment="il_in_sr ≔ TRUE" org.eventb.core.label="act1"/>
+</org.eventb.core.event>
+</org.eventb.core.machineFile>

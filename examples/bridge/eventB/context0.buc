@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.contextFile org.eventb.core.configuration="org.eventb.core.fwd;de.prob.symbolic.ctxBase;de.prob.units.mchBase" org.eventb.texttools.text_lastmodified="1384791511917" org.eventb.texttools.text_representation="context context0&#10;&#10;sets LIGHT&#10;&#10;constants d green red&#10;&#10;axioms&#10;  @axm1 d ∈ ℕ1 ∧ d=3&#10;  @axm2 LIGHT = {green, red}&#10;  @axm3 green ≠ red&#10;end&#10;" version="3">
+<org.eventb.core.axiom name="internal_axm1A" org.eventb.core.label="axm1" org.eventb.core.predicate="d ∈ ℕ1 ∧ d=3"/>
+<org.eventb.core.axiom name="internal_axm2A" org.eventb.core.label="axm2" org.eventb.core.predicate="LIGHT = {green, red}"/>
+<org.eventb.core.axiom name="internal_axm3A" org.eventb.core.label="axm3" org.eventb.core.predicate="green ≠ red"/>
+<org.eventb.core.carrierSet name="internal_set1" org.eventb.core.identifier="LIGHT"/>
+<org.eventb.core.constant name="internal_cst1" org.eventb.core.identifier="d"/>
+<org.eventb.core.constant name="internal_cst2" org.eventb.core.identifier="green"/>
+<org.eventb.core.constant name="internal_cst3" org.eventb.core.identifier="red"/>
+</org.eventb.core.contextFile>

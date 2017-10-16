@@ -1,0 +1,61 @@
+{
+  "name": "m3_sensors",
+  "description": "(Projekt wurde automatisch aus Datei /home/christoph/Dokumente/Masterarbeit/software/visualization-plugin/examples/bridge/eventB/m3_sensors.bum erstellt)",
+  "machines": [
+    {
+      "name": "m3_sensors",
+      "description": "",
+      "location": "m3_sensors.bum",
+      "type": "EVENTB",
+      "ltlFormulas": [],
+      "ltlPatterns": [],
+      "cbcFormulas": [],
+      "modelcheckingItems": []
+    },
+    {
+      "name": "m0_island_bridge",
+      "description": "",
+      "location": "m0_island_bridge.bum",
+      "type": "EVENTB",
+      "ltlFormulas": [],
+      "ltlPatterns": [],
+      "cbcFormulas": [],
+      "modelcheckingItems": []
+    },
+    {
+      "name": "m1_bridge",
+      "description": "",
+      "location": "m1_bridge.bum",
+      "type": "EVENTB",
+      "ltlFormulas": [],
+      "ltlPatterns": [],
+      "cbcFormulas": [],
+      "modelcheckingItems": []
+    },
+    {
+      "name": "m2_lights",
+      "description": "",
+      "location": "m2_lights.bum",
+      "type": "EVENTB",
+      "ltlFormulas": [],
+      "ltlPatterns": [],
+      "cbcFormulas": [],
+      "modelcheckingItems": []
+    }
+  ],
+  "preferences": [],
+  "runconfigurations": [
+    {
+      "name": "m1_bridge.default"
+    },
+    {
+      "name": "m3_sensors.default"
+    },
+    {
+      "name": "m2_lights.default"
+    },
+    {
+      "name": "m0_island_bridge.default"
+    }
+  ]
+}

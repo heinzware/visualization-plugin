@@ -37,10 +37,12 @@ public class TrafficLight extends Group{
 
         setTranslateX(x);
         setTranslateY(y);
+
+        setGreen(false);
     }
 
     public void setGreen(boolean green) {
-        greenLight.setFill(green ? Color.GREEN : Color.WHITE);
-        redLight.setFill(green? Color.WHITE : Color.RED);
+        greenLight.setFill(green ? Color.GREEN : Color.DARKGRAY);
+        redLight.setFill(green? Color.DARKGRAY : Color.RED);
     }
 }

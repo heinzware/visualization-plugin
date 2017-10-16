@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.machineFile org.eventb.core.configuration="org.eventb.core.fwd;de.prob.units.mchBase" org.eventb.texttools.text_lastmodified="1416221363165" org.eventb.texttools.text_representation="machine m2_lights refines m1_bridge  sees context0&#10;&#10;variables a b c ml_tl il_tl ml_pass il_pass&#10;&#10;invariants&#10;  @inv1 ml_tl ∈ LIGHT&#10;  @inv2 il_tl ∈ LIGHT&#10;  @inv3 ml_pass ∈ BOOL // at least one car has passed since the traffic light last turned green&#10;  @inv4 il_pass ∈ BOOL // ditto&#10;  @inv5 ml_tl = green ⇒ a + b + c &lt; d ∧ c = 0&#10;  @inv6 il_tl = green ⇒ b &gt; 0 ∧ a = 0&#10;  @inv7 ml_tl = red ∨ il_tl = red&#10;  @inv8 ml_tl = green ∨ ml_pass = TRUE  // ie red =&gt; pass&#10;  @inv9 il_tl = green ∨ il_pass = TRUE&#10;  @inv10 b = 0 ⇒ il_tl = red&#10;&#10;events&#10;  event INITIALISATION&#10;    then&#10;      @act1 a, b, c ≔ 0, 0, 0&#10;      @act2 ml_tl ≔ red&#10;      @act3 il_tl ≔ red&#10;      @act4 ml_pass ≔ TRUE&#10;      @act5 il_pass ≔ TRUE&#10;  end&#10;&#10;  event ML_out refines ML_out&#10;    where&#10;      @grd1 ml_tl = green&#10;      @grd2 a + b + 1 ≠ d&#10;    then&#10;      @act1 a ≔ a + 1&#10;      @act2 ml_pass ≔ TRUE&#10;  end&#10;&#10;  event ML_out_last refines ML_out&#10;    where&#10;      @grd1 ml_tl = green&#10;      @grd2 a + b + 1 = d&#10;    then&#10;      @act1 a ≔ a + 1&#10;      @act2 ml_pass ≔ TRUE&#10;      @act3 ml_tl ≔ red&#10;  end&#10;&#10;  event ML_in refines ML_in&#10;    where&#10;      @grd1 c &gt; 0&#10;    then&#10;      @act1 c ≔ c − 1&#10;  end&#10;&#10;  event IL_in refines IL_in&#10;    where&#10;      @grd1 a &gt; 0&#10;    then&#10;      @act1 a ≔ a − 1&#10;      @act2 b ≔ b + 1&#10;  end&#10;&#10;  event IL_out refines IL_out&#10;    where&#10;      @grd1 il_tl = green&#10;      @grd2 b ≠ 1&#10;    then&#10;      @act1 b ≔ b − 1&#10;      @act2 c ≔ c + 1&#10;      @act3 il_pass ≔ TRUE&#10;  end&#10;&#10;  event IL_out_last refines IL_out&#10;    where&#10;      @grd1 il_tl = green&#10;      @grd2 b = 1&#10;    then&#10;      @act1 b ≔ b − 1&#10;      @act2 c ≔ c + 1&#10;      @act3 il_pass ≔ TRUE&#10;      @act4 il_tl ≔ red&#10;  end&#10;&#10;  event ML_tl_green&#10;    where&#10;      @grd1 ml_tl = red&#10;      @grd2 a + b &lt; d&#10;      @grd3 c = 0&#10;      @grd4 il_pass = TRUE&#10;    then&#10;      @act1 ml_tl ≔ green&#10;      @act2 il_tl ≔ red&#10;      @act3 ml_pass ≔ FALSE&#10;  end&#10;&#10;  event IL_tl_green&#10;    where&#10;      @grd1 il_tl = red&#10;      @grd2 a = 0&#10;      @grd3 ml_pass = TRUE&#10;      @grd4 b &gt; 0&#10;    then&#10;      @act1 il_tl ≔ green&#10;      @act2 ml_tl ≔ red&#10;      @act3 il_pass ≔ FALSE&#10;  end&#10;end&#10;" version="5">
+<org.eventb.core.refinesMachine name="internal_refines1" org.eventb.core.target="m1_bridge"/>
+<org.eventb.core.seesContext name="internal_sees1" org.eventb.core.target="context0"/>
+<org.eventb.core.event name="internal_evt1" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="INITIALISATION">
+<org.eventb.core.action name="internal_act1" org.eventb.core.assignment="a, b, c ≔ 0, 0, 0" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="internal_act2" org.eventb.core.assignment="ml_tl ≔ red" org.eventb.core.label="act2"/>
+<org.eventb.core.action name="internal_act3" org.eventb.core.assignment="il_tl ≔ red" org.eventb.core.label="act3"/>
+<org.eventb.core.action name="internal_act4" org.eventb.core.assignment="ml_pass ≔ TRUE" org.eventb.core.label="act4"/>
+<org.eventb.core.action name="internal_act5" org.eventb.core.assignment="il_pass ≔ TRUE" org.eventb.core.label="act5"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="internal_evt2" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ML_out">
+<org.eventb.core.refinesEvent name="internal_refines1" org.eventb.core.target="ML_out"/>
+<org.eventb.core.guard name="internal_grd1" org.eventb.core.label="grd1" org.eventb.core.predicate="ml_tl = green"/>
+<org.eventb.core.guard name="internal_grd2" org.eventb.core.label="grd2" org.eventb.core.predicate="a + b + 1 ≠ d"/>
+<org.eventb.core.action name="internal_act1" org.eventb.core.assignment="a ≔ a + 1" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="internal_act2" org.eventb.core.assignment="ml_pass ≔ TRUE" org.eventb.core.label="act2"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="internal_evt8" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ML_out_last">
+<org.eventb.core.refinesEvent name="internal_refines1" org.eventb.core.target="ML_out"/>
+<org.eventb.core.guard name="internal_grd1" org.eventb.core.label="grd1" org.eventb.core.predicate="ml_tl = green"/>
+<org.eventb.core.guard name="internal_grd2" org.eventb.core.label="grd2" org.eventb.core.predicate="a + b + 1 = d"/>
+<org.eventb.core.action name="internal_act1" org.eventb.core.assignment="a ≔ a + 1" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="internal_act3" org.eventb.core.assignment="ml_pass ≔ TRUE" org.eventb.core.label="act2"/>
+<org.eventb.core.action name="internal_act4" org.eventb.core.assignment="ml_tl ≔ red" org.eventb.core.label="act3"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="internal_evt3" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ML_in">
+<org.eventb.core.refinesEvent name="internal_refines1" org.eventb.core.target="ML_in"/>
+<org.eventb.core.guard name="internal_grd1" org.eventb.core.label="grd1" org.eventb.core.predicate="c &gt; 0"/>
+<org.eventb.core.action name="internal_act1" org.eventb.core.assignment="c ≔ c − 1" org.eventb.core.label="act1"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="internal_evt4" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="IL_in">
+<org.eventb.core.refinesEvent name="internal_refines1" org.eventb.core.target="IL_in"/>
+<org.eventb.core.guard name="internal_grd1" org.eventb.core.label="grd1" org.eventb.core.predicate="a &gt; 0"/>
+<org.eventb.core.action name="internal_act1" org.eventb.core.assignment="a ≔ a − 1" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="internal_act2" org.eventb.core.assignment="b ≔ b + 1" org.eventb.core.label="act2"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="internal_evt5" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="IL_out">
+<org.eventb.core.refinesEvent name="internal_refines1" org.eventb.core.target="IL_out"/>
+<org.eventb.core.guard name="internal_grd1" org.eventb.core.label="grd1" org.eventb.core.predicate="il_tl = green"/>
+<org.eventb.core.guard name="internal_grd2" org.eventb.core.label="grd2" org.eventb.core.predicate="b ≠ 1"/>
+<org.eventb.core.action name="internal_act1" org.eventb.core.assignment="b ≔ b − 1" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="internal_act3" org.eventb.core.assignment="c ≔ c + 1" org.eventb.core.label="act2"/>
+<org.eventb.core.action name="internal_act2" org.eventb.core.assignment="il_pass ≔ TRUE" org.eventb.core.label="act3"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="internal_evt9" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="IL_out_last">
+<org.eventb.core.refinesEvent name="internal_refines1" org.eventb.core.target="IL_out"/>
+<org.eventb.core.guard name="internal_grd1" org.eventb.core.label="grd1" org.eventb.core.predicate="il_tl = green"/>
+<org.eventb.core.guard name="internal_grd2" org.eventb.core.label="grd2" org.eventb.core.predicate="b = 1"/>
+<org.eventb.core.action name="internal_act1" org.eventb.core.assignment="b ≔ b − 1" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="internal_act3" org.eventb.core.assignment="c ≔ c + 1" org.eventb.core.label="act2"/>
+<org.eventb.core.action name="internal_act4" org.eventb.core.assignment="il_pass ≔ TRUE" org.eventb.core.label="act3"/>
+<org.eventb.core.action name="internal_act5" org.eventb.core.assignment="il_tl ≔ red" org.eventb.core.label="act4"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="internal_evt6" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="ML_tl_green">
+<org.eventb.core.guard name="internal_grd1" org.eventb.core.label="grd1" org.eventb.core.predicate="ml_tl = red"/>
+<org.eventb.core.guard name="internal_grd2" org.eventb.core.label="grd2" org.eventb.core.predicate="a + b &lt; d"/>
+<org.eventb.core.guard name="internal_grd3" org.eventb.core.label="grd3" org.eventb.core.predicate="c = 0"/>
+<org.eventb.core.guard name="internal_grd4" org.eventb.core.label="grd4" org.eventb.core.predicate="il_pass = TRUE"/>
+<org.eventb.core.action name="internal_act1" org.eventb.core.assignment="ml_tl ≔ green" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="internal_act5" org.eventb.core.assignment="il_tl ≔ red" org.eventb.core.label="act2"/>
+<org.eventb.core.action name="internal_act6" org.eventb.core.assignment="ml_pass ≔ FALSE" org.eventb.core.label="act3"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="internal_evt7" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="IL_tl_green">
+<org.eventb.core.guard name="internal_grd1" org.eventb.core.label="grd1" org.eventb.core.predicate="il_tl = red"/>
+<org.eventb.core.guard name="internal_grd2" org.eventb.core.label="grd2" org.eventb.core.predicate="a = 0"/>
+<org.eventb.core.guard name="internal_grd3" org.eventb.core.label="grd3" org.eventb.core.predicate="ml_pass = TRUE"/>
+<org.eventb.core.guard name="internal_grd4" org.eventb.core.label="grd4" org.eventb.core.predicate="b &gt; 0"/>
+<org.eventb.core.action name="internal_act1" org.eventb.core.assignment="il_tl ≔ green" org.eventb.core.label="act1"/>
+<org.eventb.core.action name="internal_act5" org.eventb.core.assignment="ml_tl ≔ red" org.eventb.core.label="act2"/>
+<org.eventb.core.action name="internal_act6" org.eventb.core.assignment="il_pass ≔ FALSE" org.eventb.core.label="act3"/>
+</org.eventb.core.event>
+<org.eventb.core.invariant name="internal_inv1I" org.eventb.core.label="inv1" org.eventb.core.predicate="ml_tl ∈ LIGHT"/>
+<org.eventb.core.invariant name="internal_inv2I" org.eventb.core.label="inv2" org.eventb.core.predicate="il_tl ∈ LIGHT"/>
+<org.eventb.core.invariant name="internal_inv3I" org.eventb.core.comment="at least one car has passed since the traffic light last turned green" org.eventb.core.label="inv3" org.eventb.core.predicate="ml_pass ∈ BOOL"/>
+<org.eventb.core.invariant name="internal_inv4I" org.eventb.core.comment="ditto" org.eventb.core.label="inv4" org.eventb.core.predicate="il_pass ∈ BOOL"/>
+<org.eventb.core.invariant name="internal_inv5I" org.eventb.core.label="inv5" org.eventb.core.predicate="ml_tl = green ⇒ a + b + c &lt; d ∧ c = 0"/>
+<org.eventb.core.invariant name="internal_inv6I" org.eventb.core.label="inv6" org.eventb.core.predicate="il_tl = green ⇒ b &gt; 0 ∧ a = 0"/>
+<org.eventb.core.invariant name="internal_inv7I" org.eventb.core.label="inv7" org.eventb.core.predicate="ml_tl = red ∨ il_tl = red"/>
+<org.eventb.core.invariant name="internal_inv8I" org.eventb.core.comment="ie red =&gt; pass" org.eventb.core.label="inv8" org.eventb.core.predicate="ml_tl = green ∨ ml_pass = TRUE"/>
+<org.eventb.core.invariant name="internal_inv9I" org.eventb.core.label="inv9" org.eventb.core.predicate="il_tl = green ∨ il_pass = TRUE"/>
+<org.eventb.core.invariant name="internal_inv10I" org.eventb.core.label="inv10" org.eventb.core.predicate="b = 0 ⇒ il_tl = red"/>
+<org.eventb.core.variable name="internal_var1" org.eventb.core.identifier="a"/>
+<org.eventb.core.variable name="internal_var2" org.eventb.core.identifier="b"/>
+<org.eventb.core.variable name="internal_var3" org.eventb.core.identifier="c"/>
+<org.eventb.core.variable name="internal_var4" org.eventb.core.identifier="ml_tl"/>
+<org.eventb.core.variable name="internal_var5" org.eventb.core.identifier="il_tl"/>
+<org.eventb.core.variable name="internal_var6" org.eventb.core.identifier="ml_pass"/>
+<org.eventb.core.variable name="internal_var7" org.eventb.core.identifier="il_pass"/>
+</org.eventb.core.machineFile>

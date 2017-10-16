@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.poFile org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicateSet name="CTXHYP" org.eventb.core.poStamp="0">
+<org.eventb.core.poIdentifier name="LIGHT" org.eventb.core.type="ℙ(LIGHT)"/>
+<org.eventb.core.poIdentifier name="d" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="green" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poIdentifier name="red" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poPredicate name="greeo" org.eventb.core.predicate="d∈ℕ1∧d=3" org.eventb.core.source="/Bridge/context0.buc|org.eventb.core.contextFile#context0|org.eventb.core.axiom#internal_axm1A"/>
+<org.eventb.core.poPredicate name="greep" org.eventb.core.predicate="LIGHT={green,red}" org.eventb.core.source="/Bridge/context0.buc|org.eventb.core.contextFile#context0|org.eventb.core.axiom#internal_axm2A"/>
+<org.eventb.core.poPredicate name="greeq" org.eventb.core.predicate="green≠red" org.eventb.core.source="/Bridge/context0.buc|org.eventb.core.contextFile#context0|org.eventb.core.axiom#internal_axm3A"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="ABSHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poStamp="2">
+<org.eventb.core.poIdentifier name="a" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="b" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="c" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="il_in_sr" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="il_out_sr" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="il_pass" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="il_tl" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poIdentifier name="ml_in_sr" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="ml_out_sr" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="ml_pass" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="ml_tl" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poIdentifier name="n" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poPredicate name="ml_out_ss" org.eventb.core.predicate="n∈ℕ" org.eventb.core.source="/Bridge/m0_island_bridge.bum|org.eventb.core.machineFile#m0_island_bridge|org.eventb.core.invariant#internal_inv1I"/>
+<org.eventb.core.poPredicate name="ml_out_st" org.eventb.core.predicate="n≤d" org.eventb.core.source="/Bridge/m0_island_bridge.bum|org.eventb.core.machineFile#m0_island_bridge|org.eventb.core.invariant#internal_inv3I"/>
+<org.eventb.core.poPredicate name="ml_out_su" org.eventb.core.predicate="a∈ℕ" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.invariant#internal_inv1I"/>
+<org.eventb.core.poPredicate name="ml_out_sv" org.eventb.core.predicate="b∈ℕ" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.invariant#internal_inv2I"/>
+<org.eventb.core.poPredicate name="ml_out_sw" org.eventb.core.predicate="c∈ℕ" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.invariant#internal_inv3I"/>
+<org.eventb.core.poPredicate name="ml_out_sx" org.eventb.core.predicate="a+b+c=n" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.invariant#internal_inv4I"/>
+<org.eventb.core.poPredicate name="ml_out_sy" org.eventb.core.predicate="a=0∨c=0" org.eventb.core.source="/Bridge/m1_bridge.bum|org.eventb.core.machineFile#m1_bridge|org.eventb.core.invariant#internal_inv5I"/>
+<org.eventb.core.poPredicate name="ml_out_sz" org.eventb.core.predicate="ml_tl∈LIGHT" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.invariant#internal_inv1I"/>
+<org.eventb.core.poPredicate name="ml_out_s{" org.eventb.core.predicate="il_tl∈LIGHT" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.invariant#internal_inv2I"/>
+<org.eventb.core.poPredicate name="ml_out_s|" org.eventb.core.predicate="ml_pass∈BOOL" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.invariant#internal_inv3I"/>
+<org.eventb.core.poPredicate name="ml_out_s}" org.eventb.core.predicate="il_pass∈BOOL" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.invariant#internal_inv4I"/>
+<org.eventb.core.poPredicate name="ml_out_s~" org.eventb.core.predicate="ml_tl=green⇒a+b+c&lt;d∧c=0" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.invariant#internal_inv5I"/>
+<org.eventb.core.poPredicate name="ml_out_t'" org.eventb.core.predicate="il_tl=green⇒b&gt;0∧a=0" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.invariant#internal_inv6I"/>
+<org.eventb.core.poPredicate name="ml_out_t(" org.eventb.core.predicate="ml_tl=red∨il_tl=red" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.invariant#internal_inv7I"/>
+<org.eventb.core.poPredicate name="ml_out_t)" org.eventb.core.predicate="ml_tl=green∨ml_pass=TRUE" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.invariant#internal_inv8I"/>
+<org.eventb.core.poPredicate name="ml_out_t*" org.eventb.core.predicate="il_tl=green∨il_pass=TRUE" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.invariant#internal_inv9I"/>
+<org.eventb.core.poPredicate name="ml_out_t+" org.eventb.core.predicate="b=0⇒il_tl=red" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.invariant#internal_inv10I"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poSequent name="thm5/THM" org.eventb.core.accurate="true" org.eventb.core.poDesc="Theorem" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#HYPcontextG"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="il_in_sr=TRUE⇒c=0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#_teAAYFXYEeOWZpgIVh-bvA"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#_teAAYFXYEeOWZpgIVh-bvA"/>
+<org.eventb.core.poSelHint name="SEQHYS" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ABSHYP" org.eventb.core.poSelHintSnd="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#HYPcontextG"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poSequent name="INITIALISATION/inv5/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  establishment" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTALLHYPml_out_ss"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="FALSE=TRUE⇒0&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv5I"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt1"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt1"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv5I"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poSelHintSnd="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poSequent#INITIALISATION\/inv5\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#HYPcontextG|org.eventb.core.poPredicate#PRD4"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poSequent name="INITIALISATION/inv6/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  establishment" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTALLHYPml_out_ss"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="FALSE=TRUE⇒0&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv6I"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt1"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt1"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv6I"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poSelHintSnd="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poSequent#INITIALISATION\/inv6\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD6"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poSequent name="INITIALISATION/inv7/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  establishment" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTALLHYPml_out_ss"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="FALSE=TRUE⇒0&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv7I"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt1"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt1"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv7I"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poSelHintSnd="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poSequent#INITIALISATION\/inv7\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD7"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poPredicateSet name="EVTIDENTml_out_ss" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#CTXHYP" org.eventb.core.poStamp="5">
+<org.eventb.core.poIdentifier name="il_tl'" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poIdentifier name="il_pass'" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="a'" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="ml_tl'" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poIdentifier name="ml_out_sr'" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="ml_in_sr'" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="b'" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="il_out_sr'" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="c'" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="il_in_sr'" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="ml_pass'" org.eventb.core.type="BOOL"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPml_out_ss" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTIDENTml_out_ss" org.eventb.core.poStamp="5"/>
+<org.eventb.core.poSequent name="ML_out/inv5/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTALLHYPml_out_st"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="il_in_sr=TRUE⇒a+1&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv5I"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt2"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt2"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv5I"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poSequent#ML_out\/inv5\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#HYPcontextG|org.eventb.core.poPredicate#PRD4"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poPredicateSet name="EVTIDENTml_out_st" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="5">
+<org.eventb.core.poIdentifier name="a'" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="ml_out_sr'" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="ml_pass'" org.eventb.core.type="BOOL"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPml_out_st" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTIDENTml_out_st" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="ml_tl=green" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt2|org.eventb.core.guard#internal_grd1"/>
+<org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="a+b+1≠d" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt2|org.eventb.core.guard#internal_grd2"/>
+<org.eventb.core.poPredicate name="PRD2" org.eventb.core.predicate="ml_out_sr=TRUE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt2|org.eventb.core.guard#internal_grd3"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poSequent name="ML_out_last/inv5/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTALLHYPml_out_su"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="il_in_sr=TRUE⇒a+1&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv5I"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt8"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt8"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv5I"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poSequent#ML_out_last\/inv5\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#HYPcontextG|org.eventb.core.poPredicate#PRD4"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poPredicateSet name="EVTIDENTml_out_su" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="5">
+<org.eventb.core.poIdentifier name="a'" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="ml_tl'" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poIdentifier name="ml_out_sr'" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="ml_pass'" org.eventb.core.type="BOOL"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPml_out_su" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTIDENTml_out_su" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="ml_tl=green" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt8|org.eventb.core.guard#internal_grd1"/>
+<org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="a+b+1=d" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt8|org.eventb.core.guard#internal_grd2"/>
+<org.eventb.core.poPredicate name="PRD2" org.eventb.core.predicate="ml_out_sr=TRUE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt8|org.eventb.core.guard#internal_grd3"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poSequent name="ML_in/inv7/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTALLHYPml_out_sv"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="FALSE=TRUE⇒c − 1&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv7I"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt3"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt3"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv7I"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poSequent#ML_in\/inv7\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD7"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poSequent name="ML_in/grd1/GRD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Guard strengthening (split)" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTALLHYPml_out_sv"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="c&gt;0" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt3|org.eventb.core.guard#internal_grd1"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt3"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt3|org.eventb.core.guard#internal_grd1"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt3"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poSequent#ML_in\/grd1\/GRD|org.eventb.core.poPredicateSet#SEQHYP"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poPredicateSet name="EVTIDENTml_out_sv" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="2">
+<org.eventb.core.poIdentifier name="ml_in_sr'" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="c'" org.eventb.core.type="ℤ"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPml_out_sv" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTIDENTml_out_sv" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="ml_in_sr=TRUE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt3|org.eventb.core.guard#internal_grd1"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poSequent name="IL_in/inv5/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTALLHYPml_out_sw"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="FALSE=TRUE⇒a − 1&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv5I"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt4"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt4"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv5I"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poSequent#IL_in\/inv5\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#HYPcontextG|org.eventb.core.poPredicate#PRD4"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poSequent name="IL_in/inv6/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTALLHYPml_out_sw"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="il_out_sr=TRUE⇒b+1&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv6I"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt4"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt4"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv6I"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poSequent#IL_in\/inv6\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD6"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poSequent name="IL_in/grd1/GRD" org.eventb.core.accurate="true" org.eventb.core.poDesc="Guard strengthening (split)" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTALLHYPml_out_sw"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="a&gt;0" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt4|org.eventb.core.guard#internal_grd1"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt4"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt4|org.eventb.core.guard#internal_grd1"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt4"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poSequent#IL_in\/grd1\/GRD|org.eventb.core.poPredicateSet#SEQHYP"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poPredicateSet name="EVTIDENTml_out_sw" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="5">
+<org.eventb.core.poIdentifier name="a'" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="b'" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="il_in_sr'" org.eventb.core.type="BOOL"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPml_out_sw" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTIDENTml_out_sw" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="il_in_sr=TRUE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt4|org.eventb.core.guard#internal_grd1"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poSequent name="IL_out/inv6/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTALLHYPml_out_sx"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="FALSE=TRUE⇒b − 1&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv6I"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt5"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt5"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv6I"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poSequent#IL_out\/inv6\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD6"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poSequent name="IL_out/inv7/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTALLHYPml_out_sx"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="ml_in_sr=TRUE⇒c+1&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv7I"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt5"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt5"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv7I"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poSequent#IL_out\/inv7\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD7"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poPredicateSet name="EVTIDENTml_out_sx" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="5">
+<org.eventb.core.poIdentifier name="il_pass'" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="b'" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="il_out_sr'" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="c'" org.eventb.core.type="ℤ"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPml_out_sx" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTIDENTml_out_sx" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="il_tl=green" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt5|org.eventb.core.guard#internal_grd1"/>
+<org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="b≠1" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt5|org.eventb.core.guard#internal_grd2"/>
+<org.eventb.core.poPredicate name="PRD2" org.eventb.core.predicate="il_out_sr=TRUE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt5|org.eventb.core.guard#internal_grd3"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poSequent name="IL_out_last/inv6/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTALLHYPml_out_sy"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="FALSE=TRUE⇒b − 1&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv6I"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt9"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt9"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv6I"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poSequent#IL_out_last\/inv6\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD6"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poSequent name="IL_out_last/inv7/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTALLHYPml_out_sy"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="ml_in_sr=TRUE⇒c+1&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv7I"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="ABSTRACT" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt9"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="CONCRETE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt9"/>
+<org.eventb.core.poSource name="SEQHYT" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv7I"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poSequent#IL_out_last\/inv7\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYV" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD7"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poPredicateSet name="EVTIDENTml_out_sy" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="5">
+<org.eventb.core.poIdentifier name="il_tl'" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poIdentifier name="il_pass'" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="b'" org.eventb.core.type="ℤ"/>
+<org.eventb.core.poIdentifier name="il_out_sr'" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="c'" org.eventb.core.type="ℤ"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPml_out_sy" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTIDENTml_out_sy" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="il_tl=green" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt9|org.eventb.core.guard#internal_grd1"/>
+<org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="b=1" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt9|org.eventb.core.guard#internal_grd2"/>
+<org.eventb.core.poPredicate name="PRD2" org.eventb.core.predicate="il_out_sr=TRUE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt9|org.eventb.core.guard#internal_grd3"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTIDENTml_out_sz" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="5">
+<org.eventb.core.poIdentifier name="il_tl'" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poIdentifier name="ml_tl'" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poIdentifier name="ml_pass'" org.eventb.core.type="BOOL"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPml_out_sz" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTIDENTml_out_sz" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="ml_tl=red" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt6|org.eventb.core.guard#internal_grd1"/>
+<org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="a+b&lt;d" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt6|org.eventb.core.guard#internal_grd2"/>
+<org.eventb.core.poPredicate name="PRD2" org.eventb.core.predicate="c=0" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt6|org.eventb.core.guard#internal_grd3"/>
+<org.eventb.core.poPredicate name="PRD3" org.eventb.core.predicate="il_pass=TRUE" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt6|org.eventb.core.guard#internal_grd4"/>
+<org.eventb.core.poPredicate name="PRD4" org.eventb.core.predicate="ml_out_sr=TRUE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt6|org.eventb.core.guard#internal_grd5"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTIDENTml_out_s{" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="5">
+<org.eventb.core.poIdentifier name="il_tl'" org.eventb.core.type="LIGHT"/>
+<org.eventb.core.poIdentifier name="il_pass'" org.eventb.core.type="BOOL"/>
+<org.eventb.core.poIdentifier name="ml_tl'" org.eventb.core.type="LIGHT"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPml_out_s{" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTIDENTml_out_s{" org.eventb.core.poStamp="5">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="il_tl=red" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt7|org.eventb.core.guard#internal_grd1"/>
+<org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="a=0" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt7|org.eventb.core.guard#internal_grd2"/>
+<org.eventb.core.poPredicate name="PRD2" org.eventb.core.predicate="ml_pass=TRUE" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt7|org.eventb.core.guard#internal_grd3"/>
+<org.eventb.core.poPredicate name="PRD3" org.eventb.core.predicate="b&gt;0" org.eventb.core.source="/Bridge/m2_lights.bum|org.eventb.core.machineFile#m2_lights|org.eventb.core.event#internal_evt7|org.eventb.core.guard#internal_grd4"/>
+<org.eventb.core.poPredicate name="PRD4" org.eventb.core.predicate="il_out_sr=TRUE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt7|org.eventb.core.guard#internal_grd5"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTIDENTml_out_s|" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="2">
+<org.eventb.core.poIdentifier name="ml_out_sr'" org.eventb.core.type="BOOL"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPml_out_s|" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTIDENTml_out_s\|" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="ml_out_sr=FALSE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt10|org.eventb.core.guard#internal_grd1"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poSequent name="IL_out_arr/inv6/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTALLHYPml_out_s}"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="TRUE=TRUE⇒b&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv6I"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt11"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv6I"/>
+<org.eventb.core.poSelHint name="SEQHYT" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poSequent#IL_out_arr\/inv6\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD6"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poPredicateSet name="EVTIDENTml_out_s}" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="2">
+<org.eventb.core.poIdentifier name="il_out_sr'" org.eventb.core.type="BOOL"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPml_out_s}" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTIDENTml_out_s}" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="il_out_sr=FALSE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt11|org.eventb.core.guard#internal_grd1"/>
+<org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="b&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt11|org.eventb.core.guard#internal_grd2"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poSequent name="ML_in_arr/inv7/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTALLHYPml_out_s~"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="TRUE=TRUE⇒c&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv7I"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt12"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv7I"/>
+<org.eventb.core.poSelHint name="SEQHYT" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poSequent#ML_in_arr\/inv7\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP|org.eventb.core.poPredicate#PRD7"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poPredicateSet name="EVTIDENTml_out_s~" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="2">
+<org.eventb.core.poIdentifier name="ml_in_sr'" org.eventb.core.type="BOOL"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPml_out_s~" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTIDENTml_out_s~" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="ml_in_sr=FALSE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt12|org.eventb.core.guard#internal_grd1"/>
+<org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="c&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt12|org.eventb.core.guard#internal_grd2"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poSequent name="IL_in_arr/inv5/INV" org.eventb.core.accurate="true" org.eventb.core.poDesc="Invariant  preservation" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicateSet name="SEQHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTALLHYPml_out_t'"/>
+<org.eventb.core.poPredicate name="SEQHYQ" org.eventb.core.predicate="TRUE=TRUE⇒a&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv5I"/>
+<org.eventb.core.poSource name="SEQHYR" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt13"/>
+<org.eventb.core.poSource name="SEQHYS" org.eventb.core.poRole="DEFAULT" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv5I"/>
+<org.eventb.core.poSelHint name="SEQHYT" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poSelHintSnd="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poSequent#IL_in_arr\/inv5\/INV|org.eventb.core.poPredicateSet#SEQHYP"/>
+<org.eventb.core.poSelHint name="SEQHYU" org.eventb.core.poSelHintFst="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#HYPcontextG|org.eventb.core.poPredicate#PRD4"/>
+</org.eventb.core.poSequent>
+<org.eventb.core.poPredicateSet name="EVTIDENTml_out_t'" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ALLHYP" org.eventb.core.poStamp="2">
+<org.eventb.core.poIdentifier name="il_in_sr'" org.eventb.core.type="BOOL"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="EVTALLHYPml_out_t'" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#EVTIDENTml_out_t'" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="il_in_sr=FALSE" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt13|org.eventb.core.guard#internal_grd1"/>
+<org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="a&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.event#internal_evt13|org.eventb.core.guard#internal_grd2"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="HYPcontextG" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#ABSHYP" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicate name="PRD0" org.eventb.core.predicate="ml_out_sr∈BOOL" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv1I"/>
+<org.eventb.core.poPredicate name="PRD1" org.eventb.core.predicate="il_out_sr∈BOOL" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv2I"/>
+<org.eventb.core.poPredicate name="PRD2" org.eventb.core.predicate="ml_in_sr∈BOOL" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv3I"/>
+<org.eventb.core.poPredicate name="PRD3" org.eventb.core.predicate="il_in_sr∈BOOL" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv4I"/>
+<org.eventb.core.poPredicate name="PRD4" org.eventb.core.predicate="il_in_sr=TRUE⇒a&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv5I"/>
+</org.eventb.core.poPredicateSet>
+<org.eventb.core.poPredicateSet name="ALLHYP" org.eventb.core.parentSet="/Bridge/m3_sensors.bpo|org.eventb.core.poFile#m3_sensors|org.eventb.core.poPredicateSet#HYPcontextG" org.eventb.core.poStamp="2">
+<org.eventb.core.poPredicate name="PRD5" org.eventb.core.predicate="il_in_sr=TRUE⇒c=0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#_teAAYFXYEeOWZpgIVh-bvA"/>
+<org.eventb.core.poPredicate name="PRD6" org.eventb.core.predicate="il_out_sr=TRUE⇒b&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv6I"/>
+<org.eventb.core.poPredicate name="PRD7" org.eventb.core.predicate="ml_in_sr=TRUE⇒c&gt;0" org.eventb.core.source="/Bridge/m3_sensors.bum|org.eventb.core.machineFile#m3_sensors|org.eventb.core.invariant#internal_inv7I"/>
+</org.eventb.core.poPredicateSet>
+</org.eventb.core.poFile>
