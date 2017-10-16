@@ -14,7 +14,6 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -24,7 +23,6 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ro.fortsoft.pf4j.PluginClassLoader;
@@ -356,6 +354,7 @@ public class VisualizationPlugin extends ProBPlugin {
             if (visualization.isNotNull().get()) {
                 Node visualizationContent = ((AnchorPane) visualizationStage.getScene().getRoot()).getChildren().get(0);
                 visualizationTab.setContent(visualizationContent);
+                visualizationTab.getTabPane().getSelectionModel().select(visualizationTab);
             }
             detached.set(false);
             visualizationStage = null;
